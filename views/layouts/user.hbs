@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" id="html" class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{!-- <link rel="icon" type="image/x-icon" href="../../img/bluecloud.png"> --}}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+   
+    <title>{{title}}</title>
+  
+    {{!-- Link css main - trông partial --}}
+    {{>cssmain}}
+    {{>(cssCs)}}
+
+    
+</head>
+
+<body>
+     
+    {{{body}}}
+
+    {{!-- link script trong partial --}}
+    {{>scriptmain}}
+    {{>(scriptCs)}}
+</body>
+</html>
