@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Khi click vào nút có trong remove modal
     btnRemove.onclick = function() {
-        removeForm.action = '/allorders/' + o_id + `?_method=DELETE&search=${search}&page=${page}`;
+        removeForm.action = '/order/' + o_id + `?_method=DELETE&search=${search}&page=${page}`;
         removeForm.submit();
     };
 
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (updateError) return;
 
-        updateForm.action = '/allorders/' + o_id + `?_method=PUT&search=${search}&page=${page}`;
+        updateForm.action = '/order/' + o_id + `?_method=PUT&search=${search}&page=${page}`;
         updateForm.submit();
     }
 });
