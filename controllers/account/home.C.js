@@ -4,10 +4,42 @@ const router = express.Router();
 const {
   getAllAccounts,
   getOneAccount,
-  updateAccount
+  updateAccount,
+  deleteAccount,
+  addAccount,
 } = require("../../models/account/account.M");
 router.get("/", async (req, res, next) => {
   try {
+    const allAccounts = await getAllAccounts();
+
+    res.render("account", {
+      title: "Account page",
+      cssCs: () => "account/css",
+      scriptCs: () => "account/script",
+      allAccounts: allAccounts,
+    });
+  } catch (err) {
+    throw Error(err);
+  }
+});
+router.get("/add", async (req, res, next) => {
+  try {
+    res.render("addAccount", {
+      title: "Account add page",
+      cssCs: () => "account/css",
+      scriptCs: () => "account/script",
+    });
+  } catch (err) {
+    throw Error(err);
+  }
+});
+router.get("/delete/:id", async (req, res, next) => {
+  try {
+    const deleteAccountId = req.params;
+    console.log("delete account ", deleteAccountId);
+    await deleteAccount(deleteAccountId);
+
+
     const allAccounts = await getAllAccounts();
 
     res.render("account", {
@@ -27,6 +59,21 @@ router.post("/", async (req, res, next) => {
     await updateAccount(accountUpdate);
     const allAccounts = await getAllAccounts();
 
+    res.render("account", {
+      title: "Account page",
+      cssCs: () => "account/css",
+      scriptCs: () => "account/script",
+      allAccounts: allAccounts,
+    });
+  } catch (err) {
+    throw Error(err);
+  }
+});
+router.post("/add", async (req, res, next) => {
+  try {
+    const newAccount = req.body;
+    await addAccount(newAccount);
+    const allAccounts = await getAllAccounts();
     res.render("account", {
       title: "Account page",
       cssCs: () => "account/css",

@@ -498,165 +498,156 @@
     </div> }}
             <div class="col-xl-12">
               <!-- Account details card-->
-              {{#with oneAccount}}
-                <div class="card mb-4">
-                  <div class="card-header">Account Details</div>
-                  <div class="card-body">
-                    <form action="/account" method="POST">
-                      <!-- Form Group (username)-->
+              <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                  <form
+                    action="/account/add"
+                    method="POST"
+                    name="Form"
+                    onsubmit="return validateForm()"
+                  >
+                    <!-- Form Group (username)-->
+                    <input
+                      name="id"
+                      value=""
+                      style="visibility:hidden"
+                      type="hidden"
+                    />
+                    <div class="mb-3">
+                      <label class="small mb-1" for="inputUsername">sername (how
+                        your name will appear to other users on the site)</label>
                       <input
-                        name="id"
-                        value={{account_id}}
-                        style="visibility:hidden"
-                        type="hidden"
+                        class="form-control"
+                        id="inputUsername"
+                        type="text"
+                        placeholder="Enter your username"
+                        name="username"
+                        value=""
+                        required
                       />
-                      <div class="mb-3">
-                        <label class="small mb-1" for="inputUsername">Username
-                          (how your name will appear to other users on the site)</label>
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                      <!-- Form Group (first name)-->
+                      <div class="col-md-6">
+                        <label class="small mb-1" for="inputFirstName">First
+                          name</label>
                         <input
                           class="form-control"
-                          id="inputUsername"
+                          id="inputFirstName"
                           type="text"
-                          placeholder="Enter your username"
-                          name="username"
-                          value={{username}}
-                          disabled="disabled"
+                          placeholder="Enter your first name"
+                          name="firstname"
+                          value=""
+                          required
                         />
                       </div>
-                      <!-- Form Row-->
-                      <div class="row gx-3 mb-3">
-                        <!-- Form Group (first name)-->
-                        <div class="col-md-6">
-                          <label class="small mb-1" for="inputFirstName">First
-                            name</label>
-                          <input
-                            class="form-control"
-                            id="inputFirstName"
-                            type="text"
-                            placeholder="Enter your first name"
-                            name="firstname"
-                            value={{firstname}}
-                            disabled="disabled"
-                          />
-                        </div>
-                        <!-- Form Group (last name)-->
-                        <div class="col-md-6">
-                          <label class="small mb-1" for="inputLastName">Last
-                            name</label>
-                          <input
-                            class="form-control"
-                            id="inputLastName"
-                            type="text"
-                            name="lastname"
-                            placeholder="Enter your last name"
-                            value={{lastname}}
-                            disabled="disabled"
-                          />
-                        </div>
+                      <!-- Form Group (last name)-->
+                      <div class="col-md-6">
+                        <label class="small mb-1" for="inputLastName">Last name</label>
+                        <input
+                          class="form-control"
+                          id="inputLastName"
+                          type="text"
+                          name="lastname"
+                          placeholder="Enter your last name"
+                          value=""
+                          required
+                        />
                       </div>
-                      <!-- Form Row        -->
-                      <div class="row gx-3 mb-3">
-                        <!-- Form Group (organization name)-->
-                        <div class="col-md-6">
-                          <label class="small mb-1" for="inputPhone">Phone
-                            number</label>
-                          <input
-                            class="form-control"
-                            id="inputPhone"
-                            type="tel"
-                            placeholder="Enter your phone"
-                            name="phone"
-                            value={{phone}}
-                            disabled="disabled"
-                          />
-                        </div>
-                        <!-- Form Group (location)-->
-                        <div class="col-md-6">
-                          <label
-                            class="small mb-1"
-                            for="inputAddress"
-                          >Address</label>
-                          <input
-                            class="form-control"
-                            id="inputAddress"
-                            type="text"
-                            placeholder="Enter your location"
-                            name="address"
-                            value={{address}}
-                            disabled="disabled"
-                          />
-                        </div>
+                    </div>
+                    <!-- Form Row        -->
+                    <div class="row gx-3 mb-3">
+                      <!-- Form Group (organization name)-->
+                      <div class="col-md-6">
+                        <label class="small mb-1" for="inputPhone">Phone number</label>
+                        <input
+                          class="form-control"
+                          id="inputPhone"
+                          type="tel"
+                          placeholder="Enter your phone"
+                          name="phone"
+                          value=""
+                          required
+                        />
                       </div>
+                      <!-- Form Group (location)-->
+                      <div class="col-md-6">
+                        <label
+                          class="small mb-1"
+                          for="inputAddress"
+                        >Address</label>
+                        <input
+                          class="form-control"
+                          id="inputAddress"
+                          type="text"
+                          placeholder="Enter your location"
+                          name="address"
+                          value=""
+                          required
+                        />
+                      </div>
+                    </div>
 
-                      <div class="mb-3">
-                        <label class="small mb-1" for="inputWard">Ward</label>
+                    <div class="mb-3">
+                      <label class="small mb-1" for="inputWard">Ward</label>
+                      <input
+                        class="form-control"
+                        id="inputWard"
+                        type="text"
+                        placeholder="Enter your ward"
+                        name="ward"
+                        value=""
+                        required
+                      />
+                    </div>
+                    <!-- Form Row-->
+                    <div class="row gx-3 mb-3">
+                      <!-- Form Group (phone number)-->
+                      <div class="col-md-6">
+                        <label
+                          class="small mb-1"
+                          for="inputDistrict"
+                        >District</label>
                         <input
                           class="form-control"
-                          id="inputWard"
+                          id="inputDistrict"
                           type="text"
-                          placeholder="Enter your ward"
-                          name="ward"
-                          value={{ward}}
-                          disabled="disabled"
+                          placeholder="Enter your district"
+                          name="district"
+                          value=""
+                          required
                         />
                       </div>
-                      <!-- Form Row-->
-                      <div class="row gx-3 mb-3">
-                        <!-- Form Group (phone number)-->
-                        <div class="col-md-6">
-                          <label
-                            class="small mb-1"
-                            for="inputDistrict"
-                          >District</label>
-                          <input
-                            class="form-control"
-                            id="inputDistrict"
-                            type="text"
-                            placeholder="Enter your district"
-                            name="district"
-                            value={{district}}
-                            disabled="disabled"
-                          />
-                        </div>
-                        <!-- Form Group (birthday)-->
-                        <div class="col-md-6">
-                          <label
-                            class="small mb-1"
-                            for="inputProvince"
-                          >Province</label>
-                          <input
-                            class="form-control"
-                            id="inputProvince"
-                            type="text"
-                            name="birthday"
-                            placeholder="Enter your province"
-                            name="province"
-                            value={{province}}
-                            disabled="disabled"
-                          />
-                        </div>
+                      <!-- Form Group (birthday)-->
+                      <div class="col-md-6">
+                        <label
+                          class="small mb-1"
+                          for="inputProvince"
+                        >Province</label>
+                        <input
+                          class="form-control"
+                          id="inputProvince"
+                          type="text"
+                          name="birthday"
+                          placeholder="Enter your province"
+                          name="province"
+                          value=""
+                          required
+                        />
                       </div>
-                        <div class="mb-3">
-                          <label class="small mb-1" for="inputStatus">Status</label>
-                          <input
-                            class="form-control"
-                            id="inputStatus"
-                            type="text"
-                            placeholder="Enter your ward"
-                            name="status"
-                            value={{account_status}}
-                          />
-                        </div>
-                      <!-- Save changes button-->
-                      <button
-                        class="btn btn-primary"
-                        id="save"
-                        type="submit"
-                      >Save changes</button>
-                    </form>
-                  </div>
+                    </div>
+                    <!-- Save changes button-->
+                    <button
+                      class="btn btn-primary"
+                      id="save"
+                      type="submit"
+                    >Save changes</button>
+                  </form>
                 </div>
-              {{/with}}
+              </div>
+
             </div>
           </div>
         </div>

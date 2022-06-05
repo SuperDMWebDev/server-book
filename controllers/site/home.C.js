@@ -30,20 +30,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET /book/:id/detail
 
-router.get("/book/:id/detail", async (req, res) => {
-  try {
-    let bookID = req.params.id;
-
-    res.render("DetailBook/DetailBook", {
-      title: "Home page | Blue Book Store ",
-      cssCs: () => "detail/css",
-      scriptCs: () => "home/script",
-    });
-  } catch (err) {
-    throw Error(err);
-  }
-});
 
 module.exports = router;
