@@ -1,0 +1,333 @@
+<div class="container-cart">
+
+    <div id="toast-msg">
+    </div>
+    <div class="title section-title">
+        <h3 class="section-bestseller title secondary-title">QUẢN LÝ ĐƠN HÀNG</h3>
+    </div>
+
+    <div class="nav__account-search">
+        <form class="form-inline" action="" method="get">
+            <input class="form-control mr-sm-2" type="search" id="search" name="search" placeholder="Search by customer's phone" aria-label="Search"
+            {{#if search}} value="{{search}}" {{/if}}>
+            <button class="btn btn-outline-success my-2 my-sm-0 search-icon btn-primary" 
+            style="border:none; background:##688dfd"
+            type="submit"><i class="fas fa-search"></i></button>
+        </form>
+        
+    </div>
+          
+    {{#if notFound}}
+          <div id="notfound">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <h2>
+                  Không tìm thấy sản phẩm phù hợp  
+              </h2>
+          </div>
+    {{else}}
+    <div class="content-table table-hover">
+    
+        <table class="table table__content table-bordered table-hover">
+            <thead class="table__content-thead">
+                <tr>
+                    <th>ID</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Thời gian</th>
+                    <th scope="col">SĐT</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Chỉnh sửa</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {{#each AllOrders}}
+                <tr>
+                    <td class="order-id"><p id="order-id">#{{this.order_id}}</p></td>
+                    <td>{{this.order_total}}</td>
+                    <td>{{this.order_time}}</td>
+                    <td>{{this.order_phone}}</td>
+                    <td>{{this.order_a}}</td>
+                    <td>{{this.order_status}}</td>
+                    <td class="common--btn">
+                        <div class="button-edit">
+                          <a href="/order/detail/{{this.order_id}}" style="color:white;" onfocus="return false" target="_blank">
+                              <button class="btn btn__item btn--blue" style="padding: 5px; font-size:15px">
+                                  Chi tiết
+                              </button>
+                          </a>
+                        </div>
+                        <div class="button-edit">
+                          <button type="button" class="btn btn__item btn--green" style="padding: 5px; font-size:15px"
+                              data-toggle="modal" data-o_id="{{this.order_id}}" data-o_phone = "{{this.order_phone}}"
+                              data-o_address = "{{this.order_a}}" data-o_status="{{this.order_status}}" data-target="#updateModal"
+                              {{#compareString this.order_status "Đã hủy"}}disabled{{/compareString}}>
+                              Cập nhật
+                          </button>
+                        </div>
+                        <div class="button-edit">
+                          <button type="button" class="btn btn__item btn--red" style="padding: 5px; font-size:15px"
+                              data-toggle="modal" data-o_id="{{this.order_id}}" data-target="#removeModal"
+                              {{#compareString this.order_status "Đã hủy"}}disabled{{/compareString}}>
+                              Hủy
+                          </button>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    
+    </div>
+  {{/if}}
+  <div class="page__navigation">
+        <ul class="pagination page">
+         
+            {{#forN total_page}}
+            <li class="pag__item">              
+                <a class="pag__link {{#compareInt this ../page}} pag__link--active{{/compareInt}}"
+                href="/allorders?page={{this}}&search={{../search}}">{{this}}</a>
+            </li>
+            {{/forN}}
+        </ul>
+  </div>
+</div>
+
+<!-- Confirm remove modal -->
+<div class="modal fade" id="removeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="removeModalHead" class="modal-title" style="font-size: 20px;">Hủy đơn hàng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="removeModalMsg" class="modal-body">
+          Bạn có chắc muốn hủy đơn hàng ... ?
+        
+      </div>
+      <div class="modal-footer">
+        <button id="btnRemove" type="button" class="btn btn__conf btn-light" background="#eee" style="font-size: 15px">Có</button>
+        <button type="button" class="btn btn-secondary btn__conf btn-danger" style="font-size: 15px" data-dismiss="modal">Không</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form remove ẩn -->
+<form name="removeForm" method="POST" action=""></form>
+
+
+<!-- Update modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" width="100%">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="updateModalHead" class="modal-title" style="font-size: 20px;">Sửa hóa đơn ...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="updateForm" method="post" action="">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">ID</label>
+            <div class="col-sm-8">
+              <input id="modalUId" type="text" readonly class="form-control-plaintext" style="font-size: 15px;">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Sđt</label>
+            <div class="col-sm-8">
+              <input id="modalUPhone" type="text" class="form-control" require style="font-size: 15px;" name="o_phone">
+            </div>
+          </div>
+          <div id="formBack1" role="alert">
+
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Địa chỉ</label>
+            <div class="col-sm-8">
+              <input id="modalUAddress" type="text" class="form-control" require style="font-size: 15px;" name="o_address">
+            </div>
+          </div>
+          <div class="form-select-add form-item">
+              <div class="form-group ">
+                  <label for="province ">Tỉnh - thành phố</label>
+                  <select name="province" class="form-select form-province ">
+                    <option select="selected ">Rỗng</option>
+                  </select>
+              </div>
+              <div class="form-group ">
+                  <label for="district ">Thành phố - huyện</label>
+                  <select name="district" class="form-select form-district ">
+                      <option>Rỗng</option>
+                  </select>
+              </div>
+              <div class="form-group form-wards ">
+                  <label for="ward ">Phường - xã</label>
+                  <select name="ward" class="form-select form-ward ">
+                      <option>Rỗng</option>
+                  </select>
+              </div>
+          </div>
+          <div id="formBack2" role="alert">
+        
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Trạng thái</label>
+            <div class="col-sm-8  checkbox__radio--owner">
+              <div class="primary">
+                <input class="checkbox__radio--item" id="checked" name="o_status" value="1" type="radio" class="form-control" style="font-size: 15px;" 
+                >
+                <label>Đã xác nhận</label>
+              </div>
+              <div class="secondary">
+                <input class="checkbox__radio--item" id="shiping"  name="o_status" value ="2" type="radio" class="form-control" style="font-size: 15px;"
+                >
+                <label>Đang giao</label>
+              </div>
+              <div class="secondary">
+                <input class="checkbox__radio--item" id="shipped"  name="o_status" value ="3" type="radio" class="form-control" style="font-size: 15px;"
+                >
+                <label>Đã giao</label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btnUpdate" type="button" class="btn btn-success" style="font-size: 15px">Xác nhận </button>
+        <button type="button" class="btn btn-secondary" style="font-size: 15px" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script cho cả trang -->
+
+{{#compareString del "error" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showErrorToast("Hủy đơn hàng không thành công. Hãy thử lại");
+    }); 
+</script> 
+{{/compareString}}
+{{#compareString del "success" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showSuccessToast("Hủy đơn hàng thành công");
+    }); 
+</script> 
+{{/compareString}}
+{{#compareString update "success" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showSuccessToast("Cập nhật đơn hàng thành công");
+    }); 
+</script> 
+{{/compareString}}
+{{#compareString update "error" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showSuccessToast("Cập nhật đơn hàng không thành công");
+    }); 
+</script> 
+{{/compareString}}
+
+<script type="text/javascript" src="../../javascript/order.js"></script>
+<script
+  type="text/javascript"
+  src="../../javascript/datatables-demo.js"
+></script>
+<script src="../../javascript/datatables/jquery.dataTables.min.js"></script>
+<script src="../../javascript/datatables/dataTables.bootstrap4.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var o_id;
+    // Phần hủy hóa đơn
+    var btnRemove = document.getElementById("btnRemove");
+    var removeForm = document.forms['removeForm'];
+
+    // Khi remove modal hiện lên
+    $('#removeModal').on('show.bs.modal', function(event) {
+        var passBtn = $(event.relatedTarget);
+
+        o_id = passBtn.data('o_id');
+
+        $('#removeModalMsg').text(`
+          Bạn có chắc muốn hủy đơn hàng #${o_id}
+          `);
+    });
+
+    // Khi click vào nút có trong remove modal
+    btnRemove.onclick = function() {
+        removeForm.action = '/order/' + o_id + `?_method=DELETE&search=${search}&page=${page}`;
+        removeForm.submit();
+    };
+
+    // Phân sửa hóa đơn
+    var o_phone;
+    var o_address;
+    var o_status;
+    var btnUpdate = document.getElementById("btnUpdate");
+    var updateForm = document.forms['updateForm'];
+
+
+    // Khi update modal hiện lên
+    $('#updateModal').on('show.bs.modal', function(event) {
+        var passBtn = $(event.relatedTarget);
+
+        o_id = passBtn.data('o_id');
+        o_phone = passBtn.data('o_phone');
+        o_address = passBtn.data('o_address');
+        o_status = passBtn.data('o_status');
+        console.log("status of order:", passBtn.data('o_status'));
+        if (o_status == "Đã thanh toán") {
+            document.getElementById("paid").checked = 'checked';
+        } else if (o_status == "Chưa thanh toán") {
+            document.getElementById("unpaid").checked = 'checked';
+        }
+        $('#updateModalHead').text(`Sửa hoá đơn`);
+        document.getElementById("modalUId").value = `#${o_id}`;
+        document.getElementById("modalUPhone").value = o_phone;
+        document.getElementById("modalUAddress").value = o_address;
+
+    });
+
+
+    // Khi ấn nút xác nhận chỉnh sửa
+    btnUpdate.onclick = function() {
+        let testPhone = updateForm.o_phone.value;
+        let testAddress = updateForm.o_address.value;
+        let updateError = false;
+
+        // Nếu không nhập sđt
+        if (!testPhone) {
+            updateError = true;
+            document.getElementById("formBack1").setAttribute('class', "alert alert-danger");
+            $('#formBack1').text("Vui lòng nhập vào trường này.");
+        } else {
+            document.getElementById("formBack1").setAttribute('class', "");
+            $('#formBack1').text("");
+        }
+
+        // Nếu không nhập địa chỉ
+        if (!testAddress) {
+            updateError = true;
+            document.getElementById("formBack2").setAttribute('class', "alert alert-danger");
+            $('#formBack2').text("Vui lòng nhập vào trường này.");
+        } else {
+            document.getElementById("formBack2").setAttribute('class', "");
+            $('#formBack2').text("");
+        }
+
+        if (updateError) return;
+
+        updateForm.action = '/order/' + o_id + `?_method=PUT&search=${search}&page=${page}`;
+        updateForm.submit();
+    }
+});
+</script>
