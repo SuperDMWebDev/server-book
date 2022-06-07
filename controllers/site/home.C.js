@@ -9,7 +9,7 @@ const { getAllComments } = require("../../models/comment/comment.M");
 // C la controller
 //
 // / la trnag xmem thong ke
-router.get("/", async (req, res) => {
+router.get("/admin", async (req, res) => {
   try {
     const allProducts = await getAllProducts();
     const allAccounts = await getAllAccounts(); // tru tai khoan admin

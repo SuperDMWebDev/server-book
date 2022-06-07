@@ -475,6 +475,8 @@
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
+            <form action="/product/update" method="POST">
+            <button  id="update-button"  type="submit" class="update-button">Update Status</button>
             <div class="card-body">
 
               <div class="table-responsive">
@@ -484,35 +486,40 @@
                   width="100%"
                   cellspacing="0"
                 >
-                  <button className="add_button" onClick=window.location.href="/account/add">Add new account </button> 
 
                   <thead>
                     <tr>
-                      <th>UserName</th>
-                      <th>FullName</th>
-                      <th>Phone</th>
-                      <th>Role_id</th>
-                      <th>Account_status</th>
+                      <th>Id</th>
+                      <th>Product name</th>
+                      <th>description</th>
+                      <th>Price</th>
+                      <th>Product_status</th>
 
                     </tr>
                     <tbody>
-                      {{#each allAccounts}}
+                      {{#each allProducts}}
                         <tr>
                           {{#with this}}
-                            <td>{{username}}</td>
-                            <td>{{firstname}} {{lastname}}</td>
-                            <td>{{phone}}</td>
-                            <td>{{role_id}}</td>
-                            <td>{{account_status}}
-                              <div>
-                                <a href="account/edit/{{account_id}}">
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a href="account/delete/{{account_id}}">
-                                  <i class="fa-solid fa-trash"></i>
-                                </a>
-                              </div>
-                            </td>
+                            <td>{{product_id}}</td>
+                            <td>{{product_name}}</td>
+                            <td>{{description}}</td>
+                            <td>{{price}}</td>
+                            {{#if (isActive is_active)}}
+                              <td><input
+                                  type="checkbox"
+                                  id=cb{{product_id}}
+                                  class="check-status"
+                                  name=cb{{product_id}}
+                                  checked
+                                /></td>
+                            {{else}}
+                              <td><input
+                                  type="checkbox"
+                                   id=cb{{product_id}}
+                                    name=cb{{product_id}}
+                                  class="check-status"
+                                /></td>
+                            {{/if}}
 
                           {{/with}}
                         </tr>
@@ -523,6 +530,7 @@
                 </table>
               </div>
             </div>
+            </form>
           </div>
 
         </div>

@@ -28,3 +28,17 @@ exports.showingPrice = (price) => {
   price = parseInt(price);
   return String(price).replace(/(.)(?=(\d{3})+$)/g, "$1,");
 };
+const updateItem = async(item)=>{
+  const {product_id, is_active } = item;
+  console.log("new product", product_id, is_active);
+  await db.query(`update ${products} set "is_active"='${is_active}' where "product_id"='${product_id}'`);
+}
+exports.updateAllProducts = async (newProducts) => {
+  console.log("new products", newProducts);
+    for(let i=0;i<newProducts.length;i++)
+    {
+
+       await updateItem(newProducts[i]);
+    }
+  
+}
