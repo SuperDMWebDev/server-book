@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     {{!-- <link rel="icon" type="image/x-icon" href="../../img/bluecloud.png"> --}}
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-   
+    
     <title>{{title}}</title>
-  
+    <link rel="stylesheet" href="../../css/sb-admin-2.css"/>
     {{!-- Link css main - trông partial --}}
     {{>cssmain}}
     {{>(cssCs)}}
@@ -17,11 +17,15 @@
 </head>
 
 <body>
-     
-    {{{body}}}
+  
 
-    {{!-- link script trong partial --}}
-    {{>scriptmain}}
-    {{>(scriptCs)}}
+        {{>header}}
+        {{>navbar}}
+        {{{body}}}
+
+        {{!-- link script trong partial --}}
+        {{>scriptmain}}
+        {{>(scriptCs)}}
+   
 </body>
 </html>

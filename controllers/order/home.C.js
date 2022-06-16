@@ -30,7 +30,7 @@ router.get("/", async (req, res, next) => {
     for (let anOrder of allOrders) {
         anOrder.order_total = showingPrice(anOrder.order_total);
         anOrder.order_time = convertDate(anOrder.order_time);
-
+      
         detailaddress = anOrder.order_a + ", " + anOrder.order_w + ", " + anOrder.order_p + ", " + anOrder.order_p;
         anOrder.order_a = detailaddress;
 

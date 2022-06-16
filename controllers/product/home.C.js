@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { getAllProducts, updateAllProducts } = require("../../models/product/products.M");
+const {
+  getAllProducts,
+  updateAllProducts,
+} = require("../../models/product/products.M");
 // GET /homepage
 // C la controller
 //
@@ -9,7 +12,7 @@ const { getAllProducts, updateAllProducts } = require("../../models/product/prod
 router.get("/", async (req, res) => {
   try {
     const allProducts = await getAllProducts();
-    // console.log("all products", allProducts);
+    console.log("all products", allProducts);
     res.render("product", {
       title: "Product Page | Blue Book Store ",
       cssCs: () => "product/css",
@@ -28,7 +31,17 @@ router.get("/", async (req, res) => {
 //         throw Error(err);
 //     }
 // })
-
+router.get("/detail/:id", async (req, res) => {
+  try {
+    res.render("detailProduct", {
+      title: "Detail product",
+      cssCs: () => "product/css",
+      scriptCs: () => "product/script",
+    });
+  } catch (err) {
+    throw Error(err);
+  }
+});
 router.post("/update", async (req, res) => {
   try {
     const checkBoxValue = req.body;
@@ -37,20 +50,20 @@ router.post("/update", async (req, res) => {
     const newProducts = allProducts;
     newProducts.map((item, idx) => {
       // console.log("item ", item);
-    
+
       const index = "cb".concat(idx + 1);
       // console.log("check box value index ", index, checkBoxValue[index]);
       item.is_active = checkBoxValue[index] === "on" ? 1 : 0;
-      
     });
     // console.log("all products after ", newProducts);
     await updateAllProducts(newProducts);
-    res.render("product", {
-      title: "Product Page | Blue Book Store ",
-      cssCs: () => "product/css",
-      scriptCs: () => "product/script",
-      allProducts: newProducts,
-    });
+    return res.redirect("/product");
+    // res.render("product", {
+    //   title: "Product Page | Blue Book Store ",
+    //   cssCs: () => "product/css",
+    //   scriptCs: () => "product/script",
+    //   allProducts: newProducts,
+    // });
   } catch (err) {
     throw Error(err);
   }

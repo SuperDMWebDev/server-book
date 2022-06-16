@@ -69,9 +69,10 @@ module.exports = (app) => {
           return 0;
         }
       },
-      isActive: function(value){
-         return value===1;
-      }
+      isActive: function (value) {
+        return value === 1;
+      },
+      
     },
   });
 
