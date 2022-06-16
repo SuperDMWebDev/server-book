@@ -41,6 +41,7 @@ exports.getOrders = async ({ page, per_page = 10, search }) => {
   const { rows } = await db.query(`
     select orders.order_id, accounts.username, orders.order_total, orders.order_time,
     orders.order_a, orders.order_w, orders.order_d, orders.order_p,
+    orders.order_a as fulladdress,
     orders.order_phone, orders.order_status
     from orders, accounts
     where orders.account_id = accounts.account_id  AND orders.order_phone like '%${search}%'
@@ -51,33 +52,30 @@ exports.getOrders = async ({ page, per_page = 10, search }) => {
   const total_page = total_items % per_page === 0 ? (total_items / per_page) : Math.floor(total_items / per_page) + 1;
 
   return { allOrders: rows, total_page: total_page };
-};
+}
 
 exports.cancelOrder = async(o_id) => {
   // Cập nhật lại trạng thái hóa đơn
   let cancelRow = (await db.query(`update orders set order_status = -1 where order_id = ${o_id} returning *;`)).rows[0];
-  let o_content = await getOrder(o_id);
+  let o_content = await db.query(`select * from order_content where order_id = ${o_id}`);
+  o_content = o_content.rows;
 
   // Thêm lại số lượng sản phẩm trong hóa đơn bị hủy vào kho
   for (let content of o_content) {
       let s_id = content.product_id;
-      let reStock = content.quantity;
+      let reStock = content.order_quantity;
       let { rows } = await db.query(`SELECT * FROM products WHERE "product_id" = '${s_id}'`);
-      let index = indexOfSize(rows[0].size, content.orc_size);
 
-      let newStock = parseInt(rows[0].stock[index - 1]) + parseInt(reStock);
-      await db.query(`update products set stock[${index}] = ${newStock} where "product_id" = '${s_id}'
+      let newStock = parseInt(rows[0].stock) + parseInt(reStock);
+      await db.query(`update products set stock = ${newStock} where "product_id" = '${s_id}'
         RETURNING*;`);
   }
-
   return cancelRow;
 }
 
-exports.updateOrder = async(o_id, o_phone, o_address, o_status) => {
-  //let updateRow = (await db.query(`update orders set order_phone = '${o_phone}', address = '${o_address}', status = ${o_status}
-  //where order_id = ${o_id} returning *;`)).rows[0];
-
-  let updateRow = (await db.query(`update orders set order_phone = '${o_phone}', order_status = ${o_status}
+exports.updateOrder = async(o_id, o_phone, o_a, o_p, o_d, o_w, o_status) => {
+  let updateRow = (await db.query(`update orders set order_phone = '${o_phone}', order_status = ${o_status},
+  order_a ='${o_a}', order_p ='${o_p}', order_d ='${o_d}', order_w ='${o_w}'
   where order_id = ${o_id} returning *;`)).rows[0];
 
   return updateRow;

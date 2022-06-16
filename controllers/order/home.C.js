@@ -32,7 +32,7 @@ router.get("/", async (req, res, next) => {
         anOrder.order_time = convertDate(anOrder.order_time);
       
         detailaddress = anOrder.order_a + ", " + anOrder.order_w + ", " + anOrder.order_p + ", " + anOrder.order_p;
-        anOrder.order_a = detailaddress;
+        anOrder.fulladdress = detailaddress;
 
         if (anOrder.order_status == -1) {
             anOrder.order_status = "Đã hủy"
@@ -66,17 +66,20 @@ router.get("/", async (req, res, next) => {
 router.put('/:o_id', async(req, res) => {
   let o_id = req.params.o_id;
   let o_phone = req.body.o_phone;
-  let o_address = req.body.o_address;
+  let o_a = req.body.o_a;
+  let o_p = req.body.o_p;
+  let o_d = req.body.o_d;
+  let o_w = req.body.o_w;
   let o_status = req.body.o_status;
-  let { page = 1, search } = req.query;
+  let { page = 1, search = ""} = req.query;
   // Sửa bảng
   try {
-      let updatedRow = await updateOrder(o_id, o_phone, o_address, o_status);
-      res.redirect(`/allorders?page=${page}&search=${search}&update=success`);
+      let updatedRow = await updateOrder(o_id, o_phone, o_a, o_p, o_d, o_w, o_status);
+      res.redirect(`/order/?page=${page}&search=${search}&update=success`);
 
   } catch (err) {
-      console.error("error for delete order item: ", err);
-      res.redirect(`/allorders?page=${page}&search=${search}&update=error`);
+      console.error("error for update order item: ", err);
+      res.redirect(`/order/?page=${page}&search=${search}&update=error`);
   }
 });
 
@@ -84,14 +87,14 @@ router.put('/:o_id', async(req, res) => {
 router.delete('/:o_id', async(req, res) => {
   let o_id = req.params.o_id;
 
-  const { page, search } = req.query;
+  const { page = 1, search = ""} = req.query;
 
   try {
       let cancelRow = await cancelOrder(o_id);
-      res.redirect(`/allorders?page=${page}&search=${search}&del=success`);
+      res.redirect(`/order?page=${page}&search=${search}&del=success`);
   } catch (err) {
       console.error("error for delete order item: ", err);
-      res.redirect(`/allorders?page=${page}&search=${search}&del=error`);
+      res.redirect(`/order?page=${page}&search=${search}&del=error`);
 
   }
 });

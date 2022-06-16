@@ -5,6 +5,10 @@ const {
   getAllProducts,
   updateAllProducts,
 } = require("../../models/product/products.M");
+
+const { showingPrice } = require("../../models/helper/helper.M");
+const { getProductDetail, getProductImages } = require("../../models/product/productDetail.M");
+
 // GET /homepage
 // C la controller
 //
@@ -32,9 +36,26 @@ router.get("/", async (req, res) => {
 //     }
 // })
 router.get("/detail/:id", async (req, res) => {
+  let p_id = req.params.id;
+  let detail = await getProductDetail(p_id)
+  
+  detail.price = showingPrice(detail.price)
+  if (detail.is_active == 0) {
+    detail.is_active = "Khóa"
+  }
+  else {
+    detail.is_active = "Hoạt động"
+  }
+
+  let images = await getProductImages(p_id)
+  cover = images.pop(0).image_link
+
   try {
     res.render("detailProduct", {
       title: "Detail product",
+      Detail: detail,
+      cover_link: cover,
+      sub_images: images,
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
     });
