@@ -5,6 +5,7 @@ const siteRoute = require("./site");
 const accountRoute =require("./account");
 const productRoute = require("./product");
 const orderRoute = require("./order");
+const loginRoute = require("./login");
 
 const router = express.Router();
 
@@ -18,5 +19,7 @@ router.use("/product", productRoute);
 // Quản lý đơn hàng
 router.use("/order", orderRoute);
 
+// Đăng nhập
+router.use("/login", loginRoute);
 
 module.exports = router;
