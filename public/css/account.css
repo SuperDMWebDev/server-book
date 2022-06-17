@@ -49,9 +49,8 @@ tr td:nth-child(5) {
   padding-left: 224px;
 }
 nav.navbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  position: fixed;
+  top: 0px;
 }
 ul.navbar-nav.ml-auto {
   display: flex;
@@ -60,4 +59,10 @@ ul.navbar-nav.ml-auto {
   /* align-self: flex-end; */
   float: right;
   left: 74%;
+}
+.none {
+  display: none;
+}
+.row-20 {
+  margin-top: 128px;
 }

@@ -475,8 +475,8 @@
       target="__blank"
     >Notifications</a>
   </nav> }}
-          <hr class="mt-0 mb-4" />
-          <div class="row">
+          <hr class="mt-0 mb-4 none" />
+          <div class="row row-20">
             {{! <div class="col-xl-4">
       <!-- Profile picture card-->
       <div class="card mb-4 mb-xl-0">
@@ -636,17 +636,20 @@
                           />
                         </div>
                       </div>
-                        <div class="mb-3">
-                          <label class="small mb-1" for="inputStatus">Status</label>
-                          <input
-                            class="form-control"
-                            id="inputStatus"
-                            type="text"
-                            placeholder="Enter your ward"
-                            name="status"
-                            value={{account_status}}
-                          />
-                        </div>
+                      <div class="mb-3">
+                        <label
+                          class="small mb-1"
+                          for="inputStatus"
+                        >Status</label>
+                        <input
+                          class="form-control"
+                          id="inputStatus"
+                          type="text"
+                          placeholder="Enter your ward"
+                          name="status"
+                          value={{account_status}}
+                        />
+                      </div>
                       <!-- Save changes button-->
                       <button
                         class="btn btn-primary"

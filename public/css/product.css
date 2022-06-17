@@ -126,7 +126,6 @@
 .container-fluid {
   position: fixed;
   left: 213px;
-  top: 80px;
   width: calc(100% - 224px);
 }
 body {
