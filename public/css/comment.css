@@ -1,0 +1,68 @@
+.row > div:nth-child(1) {
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+}
+.row > div:nth-child(1) label {
+  display: flex;
+}
+.row > div:nth-child(2) {
+  display: flex; /* justify-self: flex-end; */
+  align-self: center;
+  justify-content: end;
+}
+tr td:nth-child(5) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.row > div:nth-child(1) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  display: flex;
+}
+.container-fluid {
+  position: fixed;
+  left: 213px;
+  top: 80px;
+  width: calc(100% - 224px);
+}
+.navbar-nav {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
+.navbar-header {
+  position: fixed;
+  left: 224px;
+  top: 0px;
+}
+.table-responsive {
+  padding-left: 20px;
+}
+#content-wrapper {
+  display: block;
+  padding-left: 224px;
+}
+nav.navbar {
+  position: fixed;
+  top: 0px;
+}
+ul.navbar-nav.ml-auto {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  /* align-self: flex-end; */
+  float: right;
+  left: 74%;
+}
+.none {
+  display: none;
+}
+.row-20 {
+  margin-top: 128px;
+}
