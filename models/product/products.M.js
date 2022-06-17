@@ -28,17 +28,23 @@ exports.showingPrice = (price) => {
   price = parseInt(price);
   return String(price).replace(/(.)(?=(\d{3})+$)/g, "$1,");
 };
-const updateItem = async(item)=>{
-  const {product_id, is_active } = item;
+const updateItem = async (item) => {
+  const { product_id, is_active } = item;
   console.log("new product", product_id, is_active);
-  await db.query(`update ${products} set "is_active"='${is_active}' where "product_id"='${product_id}'`);
-}
+  await db.query(
+    `update ${products} set "is_active"='${is_active}' where "product_id"='${product_id}'`
+  );
+};
 exports.updateAllProducts = async (newProducts) => {
   console.log("new products", newProducts);
-    for(let i=0;i<newProducts.length;i++)
-    {
-
-       await updateItem(newProducts[i]);
-    }
-  
-}
+  for (let i = 0; i < newProducts.length; i++) {
+    await updateItem(newProducts[i]);
+  }
+};
+exports.addNewProduct = async (value) => {
+  const { name, description, category, author, publisher, price, stock } =
+    value;
+  await db.query(
+    `insert into ${products}(product_name,description,category_id,author_id,publisher_id,price,stock,is_active) values('${name}','${description}','${category}','${author}','${publisher}','${price}','${stock}','1') `
+  );
+};

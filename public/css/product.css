@@ -129,3 +129,25 @@
   top: 80px;
   width: calc(100% - 224px);
 }
+body {
+  position: relative;
+}
+ul.navbar-nav.sidebar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+div#content-wrapper {
+  position: absolute;
+  margin-left: 223px;
+  top: 0px;
+}
+#product_select {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 96%;
+  align-items: center;
+}
+.flex {
+  display: flex;
+}

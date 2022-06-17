@@ -4,10 +4,17 @@ const router = express.Router();
 const {
   getAllProducts,
   updateAllProducts,
+  addNewProduct,
 } = require("../../models/product/products.M");
 
 const { showingPrice } = require("../../models/helper/helper.M");
-const { getProductDetail, getProductImages } = require("../../models/product/productDetail.M");
+const {
+  getProductDetail,
+  getProductImages,
+} = require("../../models/product/productDetail.M");
+const { getAllCategories } = require("../../models/category/categoryM");
+const { getAllPublishers } = require("../../models/publisher/publisherM");
+const { getAllAuthors } = require("../../models/author/authorM");
 
 // GET /homepage
 // C la controller
@@ -18,7 +25,7 @@ router.get("/", async (req, res) => {
     const allProducts = await getAllProducts();
     console.log("all products", allProducts);
     res.render("product", {
-      title: "Product Page | Blue Book Store ",
+      title: "Product Page | Book Store ",
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
       allProducts: allProducts,
@@ -27,28 +34,54 @@ router.get("/", async (req, res) => {
     throw Error(err);
   }
 });
-// router.get("/update", async(req,res,next)=>{
-//     try{
-//         const a= document.getElementsByClassName("check-status");
-//         console.log("a", a);
-//     }catch(err){
-//         throw Error(err);
-//     }
-// })
+router.post("/add", async (req, res) => {
+  try {
+    const allValue = req.body;
+    // console.log("cb value ", checkBoxValue.cb1);
+    console.log("all value", allValue);
+    // console.log("all products after ", newProducts);
+    await addNewProduct(allValue);
+    return res.redirect("/product");
+    // res.render("product", {
+    //   title: "Product Page | Blue Book Store ",
+    //   cssCs: () => "product/css",
+    //   scriptCs: () => "product/script",
+    //   allProducts: newProducts,
+    // });
+  } catch (err) {
+    throw Error(err);
+  }
+});
+router.get("/add", async (req, res, next) => {
+  try {
+    const allCategories = await getAllCategories();
+    const allAuthors = await getAllAuthors();
+    const allPublishers = await getAllPublishers();
+    res.render("addProduct", {
+      title: "Product page | Add book",
+      cssCs: () => "product/css",
+      scriptCs: () => "product/script",
+      allCategories: allCategories,
+      allAuthors: allAuthors,
+      allPublishers: allPublishers,
+    });
+  } catch (err) {
+    throw Error(err);
+  }
+});
 router.get("/detail/:id", async (req, res) => {
   let p_id = req.params.id;
-  let detail = await getProductDetail(p_id)
-  
-  detail.price = showingPrice(detail.price)
+  let detail = await getProductDetail(p_id);
+
+  detail.price = showingPrice(detail.price);
   if (detail.is_active == 0) {
-    detail.is_active = "Khóa"
-  }
-  else {
-    detail.is_active = "Hoạt động"
+    detail.is_active = "Khóa";
+  } else {
+    detail.is_active = "Hoạt động";
   }
 
-  let images = await getProductImages(p_id)
-  cover = images.pop(0).image_link
+  let images = await getProductImages(p_id);
+  cover = images.pop(0).image_link;
 
   try {
     res.render("detailProduct", {
