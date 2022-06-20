@@ -15,6 +15,27 @@ const {
 const { getAllCategories } = require("../../models/category/categoryM");
 const { getAllPublishers } = require("../../models/publisher/publisherM");
 const { getAllAuthors } = require("../../models/author/authorM");
+const jwt = require('jsonwebtoken');
+
+var username = "";
+var role = 0;
+var idUser = 0;
+
+const getToken = (req, res) => {
+  const access_token = req.cookies.jwt;
+
+  if (access_token) {
+      const token = access_token.split(' ')[1];
+
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+          username = data.username
+          idUser = data.id;
+          role = data.role;
+
+          return;
+      });
+  }
+};
 
 // GET /homepage
 // C la controller
@@ -24,8 +45,12 @@ router.get("/", async (req, res) => {
   try {
     const allProducts = await getAllProducts();
     console.log("all products", allProducts);
-    res.render("product", {
+
+    getToken(req, res)
+
+    res.render("product/product", {
       title: "Product Page | Book Store ",
+      role_id: role,
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
       allProducts: allProducts,
@@ -43,8 +68,9 @@ router.post("/add", async (req, res) => {
     const allProducts = await getAllProducts();
     await addNewProduct(allValue, allProducts.length);
     return res.redirect("/product");
-    // res.render("product", {
+    // res.render("product/product", {
     //   title: "Product Page | Blue Book Store ",
+    //   role_id: role,
     //   cssCs: () => "product/css",
     //   scriptCs: () => "product/script",
     //   allProducts: newProducts,
@@ -58,8 +84,12 @@ router.get("/add", async (req, res, next) => {
     const allCategories = await getAllCategories();
     const allAuthors = await getAllAuthors();
     const allPublishers = await getAllPublishers();
-    res.render("addProduct", {
+
+    getToken(req, res)
+
+    res.render("product/addProduct", {
       title: "Product page | Add book",
+      role_id: role,
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
       allCategories: allCategories,
@@ -85,11 +115,14 @@ router.get("/detail/:id", async (req, res) => {
   cover = images.shift(0).image_link;
 
   try {
-    res.render("detailProduct", {
+    getToken(req, res)
+
+    res.render("product/detailProduct", {
       title: "Detail product",
       Detail: detail,
       cover_link: cover,
       sub_images: images,
+      role_id: role,
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
     });
@@ -113,8 +146,9 @@ router.post("/update", async (req, res) => {
     // console.log("all products after ", newProducts);
     await updateAllProducts(newProducts);
     return res.redirect("/product");
-    // res.render("product", {
+    // res.render("product/product", {
     //   title: "Product Page | Blue Book Store ",
+    //   role_id: role,
     //   cssCs: () => "product/css",
     //   scriptCs: () => "product/script",
     //   allProducts: newProducts,

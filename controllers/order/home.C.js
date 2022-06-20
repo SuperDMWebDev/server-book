@@ -3,6 +3,27 @@ const router = express.Router();
 
 const { getOrders, updateOrder, cancelOrder }=require("../../models/order/order.M");
 const { showingPrice, convertDate } = require("../../models/helper/helper.M");
+const jwt = require('jsonwebtoken');
+
+var username = "";
+var role = 0;
+var idUser = 0;
+
+const getToken = (req, res) => {
+  const access_token = req.cookies.jwt;
+
+  if (access_token) {
+      const token = access_token.split(' ')[1];
+
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+          username = data.username
+          idUser = data.id;
+          role = data.role;
+
+          return;
+      });
+  }
+};
 
 router.get("/", async (req, res, next) => {
   try {
@@ -11,10 +32,12 @@ router.get("/", async (req, res, next) => {
     search = search.trim();
 
     let { allOrders, total_page }= await getOrders({ page, search });
+    getToken(req, res)
 
     if (allOrders.length == 0) {
-      res.render('Order/order', {
+      res.render('order/order', {
           title: "Order page",
+          role_id: role,
           cssCs: () => "order/css",
           scriptCs: () => "order/script",
           allOrders,
@@ -53,6 +76,7 @@ router.get("/", async (req, res, next) => {
 
     res.render("Order/order", {
       title: "Order page",
+      role_id: role,
       cssCs: () => "order/css",
       scriptCs: () => "order/script",
       AllOrders:allOrders

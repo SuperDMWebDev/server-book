@@ -8,12 +8,37 @@ const {
   deleteAccount,
   addAccount,
 } = require("../../models/account/account.M");
+const jwt = require('jsonwebtoken');
+
+var username = "";
+var role = 0;
+var idUser = 0;
+
+const getToken = (req, res) => {
+  const access_token = req.cookies.jwt;
+
+  if (access_token) {
+      const token = access_token.split(' ')[1];
+
+      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+          username = data.username
+          idUser = data.id;
+          role = data.role;
+
+          return;
+      });
+  }
+};
+
 router.get("/", async (req, res, next) => {
   try {
     const allAccounts = await getAllAccounts();
+    
+    getToken(req, res)
 
     res.render("account/account", {
       title: "Account page",
+      role_id: role,
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -24,8 +49,11 @@ router.get("/", async (req, res, next) => {
 });
 router.get("/add", async (req, res, next) => {
   try {
+    getToken(req, res)
+
     res.render("account/addAccount", {
       title: "Account add page",
+      role_id: role,
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
     });
@@ -39,11 +67,12 @@ router.get("/delete/:id", async (req, res, next) => {
     console.log("delete account ", deleteAccountId);
     await deleteAccount(deleteAccountId);
 
-
+    getToken(req, res)
     const allAccounts = await getAllAccounts();
 
     res.render("account/account", {
       title: "Account page",
+      role_id: role,
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -57,10 +86,13 @@ router.post("/", async (req, res, next) => {
     const accountUpdate = req.body;
     console.log("account update", accountUpdate);
     await updateAccount(accountUpdate);
+
+    getToken(req, res)
     const allAccounts = await getAllAccounts();
 
     res.render("account/account", {
       title: "Account page",
+      role_id: role,
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -73,9 +105,13 @@ router.post("/add", async (req, res, next) => {
   try {
     const newAccount = req.body;
     await addAccount(newAccount);
+
+    getToken(req, res)
     const allAccounts = await getAllAccounts();
+    
     res.render("account/account", {
       title: "Account page",
+      role_id: role,
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -91,8 +127,12 @@ router.get("/edit/:id", async (req, res, next) => {
     const id = req.params.id;
     const oneAccount = await getOneAccount(id);
     console.log("one account", oneAccount[0]);
+
+    getToken(req, res)
+
     res.render("account/editAccount", {
       title: "Account edit page",
+      role_id: role,
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       oneAccount: oneAccount[0],
@@ -114,6 +154,7 @@ router.get("/edit/:id", async (req, res, next) => {
 
 //     res.render("account/account", {
 //       title: "Home page | Blue Book Store ",
+//       role_id: role,
 //       cssCs: () => "account/css",
 //       scriptCs: () => "account/script",
 //   allProducts: allProducts,
