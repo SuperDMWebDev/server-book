@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   try {
     const allAccounts = await getAllAccounts();
 
-    res.render("account", {
+    res.render("account/account", {
       title: "Account page",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
@@ -24,7 +24,7 @@ router.get("/", async (req, res, next) => {
 });
 router.get("/add", async (req, res, next) => {
   try {
-    res.render("addAccount", {
+    res.render("account/addAccount", {
       title: "Account add page",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
@@ -42,7 +42,7 @@ router.get("/delete/:id", async (req, res, next) => {
 
     const allAccounts = await getAllAccounts();
 
-    res.render("account", {
+    res.render("account/account", {
       title: "Account page",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
@@ -59,7 +59,7 @@ router.post("/", async (req, res, next) => {
     await updateAccount(accountUpdate);
     const allAccounts = await getAllAccounts();
 
-    res.render("account", {
+    res.render("account/account", {
       title: "Account page",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
@@ -74,7 +74,7 @@ router.post("/add", async (req, res, next) => {
     const newAccount = req.body;
     await addAccount(newAccount);
     const allAccounts = await getAllAccounts();
-    res.render("account", {
+    res.render("account/account", {
       title: "Account page",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
@@ -91,7 +91,7 @@ router.get("/edit/:id", async (req, res, next) => {
     const id = req.params.id;
     const oneAccount = await getOneAccount(id);
     console.log("one account", oneAccount[0]);
-    res.render("editAccount", {
+    res.render("account/editAccount", {
       title: "Account edit page",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
@@ -112,7 +112,7 @@ router.get("/edit/:id", async (req, res, next) => {
 //     const allOrders = await getAllOrders();
 //     const allComments = await getAllComments();
 
-//     res.render("account", {
+//     res.render("account/account", {
 //       title: "Home page | Blue Book Store ",
 //       cssCs: () => "account/css",
 //       scriptCs: () => "account/script",
