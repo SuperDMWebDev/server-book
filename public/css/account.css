@@ -77,3 +77,9 @@ label {
 .cursor {
   cursor: pointer;
 }
+.top-100 {
+  margin-top: 100px;
+}
+.top-45 {
+  margin-top: 45px;
+}

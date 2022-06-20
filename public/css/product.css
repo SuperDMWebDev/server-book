@@ -140,6 +140,7 @@ div#content-wrapper {
   position: absolute;
   margin-left: 223px;
   top: 0px;
+  width: calc(100% - 210px);
 }
 #product_select {
   display: flex;
