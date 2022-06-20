@@ -40,7 +40,8 @@ router.post("/add", async (req, res) => {
     // console.log("cb value ", checkBoxValue.cb1);
     console.log("all value", allValue);
     // console.log("all products after ", newProducts);
-    await addNewProduct(allValue);
+    const allProducts = await getAllProducts();
+    await addNewProduct(allValue, allProducts.length);
     return res.redirect("/product");
     // res.render("product", {
     //   title: "Product Page | Blue Book Store ",
@@ -81,7 +82,7 @@ router.get("/detail/:id", async (req, res) => {
   }
 
   let images = await getProductImages(p_id);
-  cover = images.pop(0).image_link;
+  cover = images.shift(0).image_link;
 
   try {
     res.render("detailProduct", {

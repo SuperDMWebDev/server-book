@@ -53,11 +53,21 @@ nav.navbar {
   flex-direction: row;
   justify-content: space-between;
 }
-ul.navbar-nav.ml-auto {
+.navbar-nav {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+button[type="submit"] {
+  margin-left: 38%;
+}
+.container {
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  /* align-self: flex-end; */
-  float: right;
-  left: 74%;
+}
+label[for="password"] {
+  margin-right: 40px;
 }

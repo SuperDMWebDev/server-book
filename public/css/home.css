@@ -1,3 +1,8 @@
 .chart-pie {
   transform: scale(0.6);
 }
+#content-wrapper {
+  position: fixed;
+  top: 0px;
+  left: 224px;
+}

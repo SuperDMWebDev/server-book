@@ -40,6 +40,6 @@ exports.addAccount = async (newAccount) => {
     province,
   } = newAccount;
   await db.query(
-    `insert into ${accounts}(username,pwd,firstname,lastname,phone,address,ward,district,province,role_id,account_status) values('${username}','12345678','${firstname}','${lastname}','${phone}','${address}','${ward}','${district}','${province}','1','1')`
+    `insert into ${accounts}(username,pwd,firstname,lastname,phone,address,ward,district,province,role_id,account_status) values('${username}','12345678','${firstname}','${lastname}','${phone}','${address}','${ward}','${district}','${province}','2','1')`
   );
 };

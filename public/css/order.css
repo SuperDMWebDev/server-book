@@ -1,14 +1,23 @@
 .row > div:nth-child(1) {
-    display: flex;
-    align-items: flex-end;
-    justify-content: start;
-  }
-  .row > div:nth-child(1) label{
-      display:flex;
-  }
-  .row > div:nth-child(2) {
-    display: flex; /* justify-self: flex-end; */
-    align-self: center;
-    justify-content: end;
-  }
-  
+  display: flex;
+  align-items: flex-end;
+  justify-content: start;
+}
+.row > div:nth-child(1) label {
+  display: flex;
+}
+.row > div:nth-child(2) {
+  display: flex; /* justify-self: flex-end; */
+  align-self: center;
+  justify-content: end;
+}
+.container-fluid {
+  position: fixed;
+  top: 0px;
+  left: 199px;
+  width: calc(100% - 199px);
+}
+.card-body {
+  max-height: 500px;
+  overflow: auto;
+}

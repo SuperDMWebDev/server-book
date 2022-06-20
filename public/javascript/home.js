@@ -30,9 +30,9 @@ config.element = "pie-chart";
 Morris.Donut({
   element: "pie-chart",
   data: [
-    { label: "Friends", value: 30 },
-    { label: "Allies", value: 15 },
-    { label: "Enemies", value: 45 },
-    { label: "Neutral", value: 10 },
+    { label: "products", value: 12 },
+    { label: "accounts", value: 4 },
+    { label: "comments", value: 2 },
+    { label: "orders", value: 4 },
   ],
 });

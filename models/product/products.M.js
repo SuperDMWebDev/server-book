@@ -1,5 +1,6 @@
 const db = require("../db");
 const products = "public.products";
+const images = "public.images";
 // M la model
 exports.getFiveProducts = async (
   firstID,
@@ -19,7 +20,9 @@ exports.getFiveProducts = async (
 };
 
 exports.getAllProducts = async () => {
-  const { rows } = await db.query(`SELECT * from ${products}`);
+  const { rows } = await db.query(
+    `SELECT * from ${products} order by product_id asc`
+  );
 
   return rows;
 };
@@ -41,10 +44,42 @@ exports.updateAllProducts = async (newProducts) => {
     await updateItem(newProducts[i]);
   }
 };
-exports.addNewProduct = async (value) => {
-  const { name, description, category, author, publisher, price, stock } =
-    value;
+exports.addNewProduct = async (value, size) => {
+  const {
+    name,
+    description,
+    category,
+    author,
+    publisher,
+    price,
+    stock,
+    image_1,
+    image_2,
+    image_3,
+  } = value;
   await db.query(
     `insert into ${products}(product_name,description,category_id,author_id,publisher_id,price,stock,is_active) values('${name}','${description}','${category}','${author}','${publisher}','${price}','${stock}','1') `
   );
+  console.log("size chen vao", size);
+  await db.query(
+    `insert into ${images}(image_id,product_id,image_link) values('1','${
+      size + 1
+    }','${image_1}')`
+  );
+  if (image_2 != "") {
+    console.log("link iamge 2", image_2);
+    await db.query(
+      `insert into ${images}(image_id,product_id,image_link) values('2','${
+        size + 1
+      }','${image_2}')`
+    );
+  }
+  if (image_3 != "") {
+    console.log("link iamge 3", image_3);
+    await db.query(
+      `insert into ${images}(image_id,product_id,image_link) values('3','${
+        size + 1
+      }','${image_3}')`
+    );
+  }
 };
