@@ -5,8 +5,10 @@ const siteRoute = require("./site");
 const accountRoute = require("./account");
 const productRoute = require("./product");
 const orderRoute = require("./order");
-const loginRoute = require("./login");
 const commentRoute = require("./comment");
+const loginRoute = require("./login");
+const logoutRoute = require("./logout");
+const { authenToken, checkUserIsLogin } = require('../middlewares/authorizacation.Mw')
 
 const router = express.Router();
 
@@ -14,15 +16,19 @@ console.log("vao index route");
 
 // /homepage
 router.use("/", siteRoute);
-router.use("/account", accountRoute);
-router.use("/product", productRoute);
+router.use("/account", authenToken, accountRoute);
+router.use("/product", authenToken, productRoute);
 
 // Quản lý đơn hàng
-router.use("/order", orderRoute);
+router.use("/order", authenToken, orderRoute);
 
 //quan ly binh luan
-router.use("/comment", commentRoute);
+router.use("/comment", authenToken, commentRoute);
 // Đăng nhập
-router.use("/login", loginRoute);
+router.use("/login", checkUserIsLogin, loginRoute);
+// Đăng nhập
+router.use("/logout", logoutRoute);
+
+router.use('/err', require("../controllers/site/whoop.C"));
 
 module.exports = router;

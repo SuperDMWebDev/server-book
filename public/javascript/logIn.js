@@ -3,7 +3,6 @@ const password = document.getElementById("password");
 const form = document.querySelector('.form');
 
 form.onsubmit = async(e) => {
-
     e.preventDefault();
     const errs = checkInputs();
     const uservalue = userName.value.trim();
@@ -18,11 +17,12 @@ form.onsubmit = async(e) => {
         // chuyển đổi thành json và truyền đi
         body: JSON.stringify(data),
     }
+
     try {
-        const result = await fetch('/dangnhap', options);
+        const result = await fetch('/login', options);
         const resData = await result.json();
 
-        console.log("resdata", "có vao ", resData);
+        console.log("resdata", "có vào ", resData);
         // lấy error về và thông báo lỗi
         if (!resData.status) {
             if (resData.userErr != '') {
@@ -35,24 +35,9 @@ form.onsubmit = async(e) => {
             } else {
                 setSuccessFor(password);
             }
-
-            // location.assign('/dangnhap');
-
-        } else {
-
-            const port = window.location.port;
-            console.log("port", port);
-            if (port == "4000") {
-                if (resData.role != 1) {
-                    deleteAllCookies();
-                    setErrorFor(userName, "Bạn không có quyền truy cập");
-                } else {
-                    location.assign('/home');
-                }
-            } else {
-                location.assign('/');
-            }
-
+        }
+        else {
+            location.assign('/');
         }
 
     } catch (err) {
@@ -62,10 +47,8 @@ form.onsubmit = async(e) => {
 
 
 function checkInputs() {
-
     // trim to remove the whitespaces
     const userNameValue = userName.value.trim();
-
 
     errs = { userErr: '' };
     // check validation userName
