@@ -21,3 +21,12 @@
   max-height: 500px;
   overflow: auto;
 }
+.container-cart.container {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.table th,
+.table td {
+  vertical-align: baseline;
+}
