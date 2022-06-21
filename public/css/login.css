@@ -25,12 +25,6 @@ tr td:nth-child(5) {
 .wrapper {
   display: flex;
 }
-.container-fluid {
-  position: fixed;
-  left: 213px;
-  top: 80px;
-  width: calc(100% - 224px);
-}
 .navbar-nav {
   position: fixed;
   left: 0px;
@@ -46,7 +40,6 @@ tr td:nth-child(5) {
 }
 #content-wrapper {
   display: block;
-  padding-left: 224px;
 }
 nav.navbar {
   display: flex;

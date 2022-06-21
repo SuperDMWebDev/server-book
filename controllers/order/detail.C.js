@@ -42,7 +42,10 @@ router.get('/:id', async(req, res) => {
     
     res.render('order/orderDetail', {
         title: "Order detail page",
+        user_name: username,
+        user_id: idUser,
         role_id: role,
+        header: () => "header",
         cssCs: () => "order/css",
         scriptCs: () => "order/script",
         Order: od,

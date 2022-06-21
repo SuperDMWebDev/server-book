@@ -11,8 +11,7 @@ exports.getAllComments = async () => {
 };
 exports.getAllCommentsWithAccount = async () => {
   const { rows } =
-    await db.query(`select x.username, y.comment_id,y.comment_body, 
-  y.comment_time from ${accounts} 
+    await db.query(`select x.username, y.* from ${accounts} 
   x join ${comments} y on x.account_id = y.account_id`);
   return rows;
 };

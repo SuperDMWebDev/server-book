@@ -8,6 +8,7 @@ const orderRoute = require("./order");
 const commentRoute = require("./comment");
 const loginRoute = require("./login");
 const logoutRoute = require("./logout");
+const profileRoute = require("./profile");
 const { authenToken, checkUserIsLogin } = require('../middlewares/authorizacation.Mw')
 
 const router = express.Router();
@@ -26,8 +27,11 @@ router.use("/order", authenToken, orderRoute);
 router.use("/comment", authenToken, commentRoute);
 // Đăng nhập
 router.use("/login", checkUserIsLogin, loginRoute);
-// Đăng nhập
+// Đăng xuất
 router.use("/logout", logoutRoute);
+
+// Thông tin cá nhân
+router.use("/profile", profileRoute);
 
 router.use('/err', require("../controllers/site/whoop.C"));
 

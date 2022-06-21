@@ -1,0 +1,6 @@
+#content-wrapper {
+    position: fixed;
+    left: 224px;
+    top: 0px;
+    width: calc(100% - 224px);
+  }

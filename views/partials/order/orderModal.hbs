@@ -1,0 +1,161 @@
+
+
+<!-- Confirm remove modal -->
+<div class="modal fade" id="removeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="removeModalHead" class="modal-title" style="font-size: 20px;">Hủy đơn hàng</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="removeModalMsg" class="modal-body">
+          Bạn có chắc muốn hủy đơn hàng ... ?
+        
+      </div>
+      <div class="modal-footer">
+        <button id="btnRemove" type="button" class="btn btn__conf btn-light" background="#eee" style="font-size: 15px">Có</button>
+        <button type="button" class="btn btn-secondary btn__conf btn-danger" style="font-size: 15px" data-dismiss="modal">Không</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form remove ẩn -->
+<form name="removeForm" method="POST" action=""></form>
+
+
+<!-- Update modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" width="100%">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="updateModalHead" class="modal-title" style="font-size: 20px;">Sửa hóa đơn ...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="updateForm" method="post" action="">
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">ID</label>
+            <div class="col-sm-8">
+              <input id="modalUId" type="text" readonly class="form-control-plaintext" style="font-size: 15px;">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Sđt</label>
+            <div class="col-sm-8">
+              <input id="modalUPhone" type="text" class="form-control" require style="font-size: 15px;" name="o_phone">
+            </div>
+          </div>
+
+          <div id="formBack1" role="alert">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Địa chỉ</label>
+            <div class="col-sm-8">
+              <input id="modalUA" type="text" class="form-control" require style="font-size: 15px;" name="o_a">
+            </div>
+          </div>
+
+          <div id="formBack2" role="alert">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Tỉnh - Thành phố</label>
+            <div class="col-sm-8">
+              <input id="modalUP" type="text" class="form-control" require style="font-size: 15px;" name="o_p">
+            </div>
+          </div>
+          
+          <div id="formBack3" role="alert">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Huyện - Quận</label>
+            <div class="col-sm-8">
+              <input id="modalUD" type="text" class="form-control" require style="font-size: 15px;" name="o_d">
+            </div>
+          </div>
+
+          <div id="formBack4" role="alert">
+          </div>
+
+          <div class="form-group row ">
+            <label class="col-sm-4 col-form-label">Xã - Phường</label>
+            <div class="col-sm-8">
+              <input id="modalUW" type="text" class="form-control" require style="font-size: 15px;" name="o_w">
+            </div>
+          </div>
+
+          <div id="formBack5" role="alert">
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Trạng thái</label>
+            <div class="col-sm-8  checkbox__radio--owner">
+              <div class="primary">
+                <input class="checkbox__radio--item" id="checked" name="o_status" value="1" type="radio" class="form-control" style="font-size: 15px;" 
+                >
+                <label>Đã xác nhận</label>
+              </div>
+              <div class="secondary">
+                <input class="checkbox__radio--item" id="shipping"  name="o_status" value ="2" type="radio" class="form-control" style="font-size: 15px;"
+                >
+                <label>Đang giao</label>
+              </div>
+              <div class="secondary">
+                <input class="checkbox__radio--item" id="shipped"  name="o_status" value ="3" type="radio" class="form-control" style="font-size: 15px;"
+                >
+                <label>Đã giao</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="formBack6" role="alert">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="btnUpdate" type="button" class="btn btn-success" style="font-size: 15px">Xác nhận </button>
+        <button type="button" class="btn btn-secondary" style="font-size: 15px" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- Script cho cả trang -->
+
+{{#compareString del "error" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showErrorToast("Hủy đơn hàng không thành công. Hãy thử lại");
+    }); 
+</script> 
+{{/compareString}}
+{{#compareString del "success" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showSuccessToast("Hủy đơn hàng thành công");
+    }); 
+</script> 
+{{/compareString}}
+{{#compareString update "success" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showSuccessToast("Cập nhật đơn hàng thành công");
+    }); 
+</script> 
+{{/compareString}}
+{{#compareString update "error" }} 
+<script >
+    window.addEventListener("load",  function() {
+        showErrorToast("Cập nhật đơn hàng không thành công");
+    }); 
+</script> 
+{{/compareString}}

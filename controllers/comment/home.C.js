@@ -4,6 +4,7 @@ const {
   getAllCommentsWithAccount,
   deleteComment,
 } = require("../../models/comment/comment.M");
+const { convertDate } = require("../../models/helper/helper.M");
 const jwt = require('jsonwebtoken');
 
 var username = "";
@@ -28,13 +29,20 @@ const getToken = (req, res) => {
 
 router.get("/", async (req, res, next) => {
   const allComments = await getAllCommentsWithAccount();
-  // console.log("all comments", allComments);
+  //console.log("all comments", allComments);
   getToken(req, res)
+
+  for (let i in allComments) {
+    allComments[i].comment_time = convertDate(allComments[i].comment_time)
+  }
 
   try {
     res.render("comment/comment", {
       title: "Comment page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "comment/css",
       scriptCs: () => "comment/script",
       allComments: allComments,
@@ -52,4 +60,5 @@ router.get("/delete/:id", async (req, res, next) => {
     console.log("e", e);
   }
 });
+
 module.exports = router;

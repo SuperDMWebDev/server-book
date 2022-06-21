@@ -5,7 +5,7 @@ exports.getAllAccounts = async () => {
   const { rows } = await db.query(`
     
     SELECT * FROM ${accounts} 
-    where role_id!=1 `);
+    where role_id!=1 and role_id != 3`);
 
   return rows;
 };

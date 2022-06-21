@@ -38,7 +38,10 @@ router.get("/", async (req, res, next) => {
 
     res.render("account/account", {
       title: "Account page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -53,7 +56,10 @@ router.get("/add", async (req, res, next) => {
 
     res.render("account/addAccount", {
       title: "Account add page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
     });
@@ -64,7 +70,7 @@ router.get("/add", async (req, res, next) => {
 router.get("/delete/:id", async (req, res, next) => {
   try {
     const deleteAccountId = req.params;
-    console.log("delete account ", deleteAccountId);
+    ////console.log("delete account ", deleteAccountId);
     await deleteAccount(deleteAccountId);
 
     getToken(req, res)
@@ -72,7 +78,10 @@ router.get("/delete/:id", async (req, res, next) => {
 
     res.render("account/account", {
       title: "Account page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -84,7 +93,7 @@ router.get("/delete/:id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const accountUpdate = req.body;
-    console.log("account update", accountUpdate);
+    ////console.log("account update", accountUpdate);
     await updateAccount(accountUpdate);
 
     getToken(req, res)
@@ -92,7 +101,10 @@ router.post("/", async (req, res, next) => {
 
     res.render("account/account", {
       title: "Account page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -111,7 +123,10 @@ router.post("/add", async (req, res, next) => {
     
     res.render("account/account", {
       title: "Account page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
@@ -122,17 +137,20 @@ router.post("/add", async (req, res, next) => {
 });
 router.get("/edit/:id", async (req, res, next) => {
   try {
-    console.log("req params", req.params);
+    //console.log("req params", req.params);
     // nhan vao :id nen la id= .id;
     const id = req.params.id;
     const oneAccount = await getOneAccount(id);
-    console.log("one account", oneAccount[0]);
+    //console.log("one account", oneAccount[0]);
 
     getToken(req, res)
 
     res.render("account/editAccount", {
       title: "Account edit page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "account/css",
       scriptCs: () => "account/script",
       oneAccount: oneAccount[0],
@@ -154,7 +172,10 @@ router.get("/edit/:id", async (req, res, next) => {
 
 //     res.render("account/account", {
 //       title: "Home page | Blue Book Store ",
-//       role_id: role,
+//       user_name: username,
+//      user_id: idUser,
+//      role_id: role,
+//       header: () => "header",
 //       cssCs: () => "account/css",
 //       scriptCs: () => "account/script",
 //   allProducts: allProducts,

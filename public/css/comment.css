@@ -10,6 +10,7 @@
   display: flex; /* justify-self: flex-end; */
   align-self: center;
   justify-content: end;
+  align-items: center;
 }
 tr td:nth-child(5) {
   display: flex;
@@ -19,53 +20,39 @@ tr td:nth-child(5) {
 .row > div:nth-child(1) {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 
 .wrapper {
   display: flex;
 }
-.container-fluid {
-  position: fixed;
-  left: 213px;
-  top: 80px;
-  width: calc(100% - 224px);
-}
-.navbar-nav {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-}
-.navbar-header {
-  position: fixed;
-  left: 224px;
-  top: 0px;
-}
+
 .table-responsive {
   padding-left: 20px;
 }
 #content-wrapper {
-  display: block;
-  padding-left: 224px;
-}
-nav.navbar {
   position: fixed;
+  left: 224px;
   top: 0px;
+  width: calc(100% - 224px);
 }
-ul.navbar-nav.ml-auto {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  /* align-self: flex-end; */
-  float: right;
-  left: 74%;
-}
+
 .none {
   display: none;
+}
+label {
+  white-space: nowrap;
+  margin-right: 20px;
+}
+.cursor {
+  cursor: pointer;
 }
 .row-20 {
   margin-top: 128px;
 }
-.card.shadow.mb-4 {
-  margin-top: 150px;
+.top-100 {
+  margin-top: 100px;
+}
+.top-45 {
+  margin-top: 45px;
 }

@@ -28,7 +28,6 @@ const getToken = (req, res) => {
 router.get("/", async (req, res, next) => {
   try {
     var { del, update, page = 1, search = "", update } = req.query;
-
     search = search.trim();
 
     let { allOrders, total_page }= await getOrders({ page, search });
@@ -37,7 +36,10 @@ router.get("/", async (req, res, next) => {
     if (allOrders.length == 0) {
       res.render('order/order', {
           title: "Order page",
+          user_name: username,
+          user_id: idUser,
           role_id: role,
+          header: () => "header",
           cssCs: () => "order/css",
           scriptCs: () => "order/script",
           allOrders,
@@ -76,7 +78,11 @@ router.get("/", async (req, res, next) => {
 
     res.render("Order/order", {
       title: "Order page",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      order: true,
+      header: () => "header",
       cssCs: () => "order/css",
       scriptCs: () => "order/script",
       AllOrders:allOrders

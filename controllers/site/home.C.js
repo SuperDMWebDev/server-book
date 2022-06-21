@@ -41,7 +41,10 @@ router.get("/", async (req, res) => {
     
     res.render("home", {
       title: "Home page | Blue Book Store ",
-      role_id:  role,
+      user_name: username,
+      user_id: idUser,
+      role_id: role,
+      header: () => "header",
       cssCs: () => "home/css",
       scriptCs: () => "home/script",
       allProducts: allProducts,

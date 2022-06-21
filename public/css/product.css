@@ -138,9 +138,9 @@ ul.navbar-nav.sidebar {
 }
 div#content-wrapper {
   position: absolute;
-  margin-left: 223px;
+  margin-left: 224px;
   top: 0px;
-  width: calc(100% - 210px);
+  width: calc(100% - 224px);
 }
 #product_select {
   display: flex;
@@ -164,4 +164,8 @@ label {
 #image-2,
 #image-3 {
   min-width: 187px;
+}
+#product_list_cover {
+  max-width:80px;
+  max-height:80px;
 }

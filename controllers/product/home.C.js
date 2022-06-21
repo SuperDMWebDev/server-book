@@ -44,13 +44,16 @@ const getToken = (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const allProducts = await getAllProducts();
-    console.log("all products", allProducts);
+    //console.log("all products", allProducts);
 
     getToken(req, res)
 
     res.render("product/product", {
       title: "Product Page | Book Store ",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
       allProducts: allProducts,
@@ -62,15 +65,18 @@ router.get("/", async (req, res) => {
 router.post("/add", async (req, res) => {
   try {
     const allValue = req.body;
-    // console.log("cb value ", checkBoxValue.cb1);
-    console.log("all value", allValue);
-    // console.log("all products after ", newProducts);
+    // //console.log("cb value ", checkBoxValue.cb1);
+    //console.log("all value", allValue);
+    // //console.log("all products after ", newProducts);
     const allProducts = await getAllProducts();
     await addNewProduct(allValue, allProducts.length);
     return res.redirect("/product");
     // res.render("product/product", {
     //   title: "Product Page | Blue Book Store ",
-    //   role_id: role,
+    //   header: () => "header",
+    //   user_name: username,
+    // user_id: idUser,
+    //  role_id: role,
     //   cssCs: () => "product/css",
     //   scriptCs: () => "product/script",
     //   allProducts: newProducts,
@@ -89,7 +95,10 @@ router.get("/add", async (req, res, next) => {
 
     res.render("product/addProduct", {
       title: "Product page | Add book",
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
       allCategories: allCategories,
@@ -122,7 +131,10 @@ router.get("/detail/:id", async (req, res) => {
       Detail: detail,
       cover_link: cover,
       sub_images: images,
+      user_name: username,
+      user_id: idUser,
       role_id: role,
+      header: () => "header",
       cssCs: () => "product/css",
       scriptCs: () => "product/script",
     });
@@ -133,22 +145,25 @@ router.get("/detail/:id", async (req, res) => {
 router.post("/update", async (req, res) => {
   try {
     const checkBoxValue = req.body;
-    // console.log("cb value ", checkBoxValue.cb1);
+    // //console.log("cb value ", checkBoxValue.cb1);
     const allProducts = await getAllProducts();
     const newProducts = allProducts;
     newProducts.map((item, idx) => {
-      // console.log("item ", item);
+      // //console.log("item ", item);
 
       const index = "cb".concat(idx + 1);
-      // console.log("check box value index ", index, checkBoxValue[index]);
+      // //console.log("check box value index ", index, checkBoxValue[index]);
       item.is_active = checkBoxValue[index] === "on" ? 1 : 0;
     });
-    // console.log("all products after ", newProducts);
+    // //console.log("all products after ", newProducts);
     await updateAllProducts(newProducts);
     return res.redirect("/product");
     // res.render("product/product", {
     //   title: "Product Page | Blue Book Store ",
-    //   role_id: role,
+    //   user_name: username,
+    //  user_id: idUser,
+    //  role_id: role,
+    //   header: () => "header",
     //   cssCs: () => "product/css",
     //   scriptCs: () => "product/script",
     //   allProducts: newProducts,

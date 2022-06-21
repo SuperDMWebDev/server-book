@@ -11,11 +11,11 @@
   align-self: center;
   justify-content: end;
 }
-.container-fluid {
+#content-wrapper {
   position: fixed;
+  left: 224px;
   top: 0px;
-  left: 199px;
-  width: calc(100% - 199px);
+  width: calc(100% - 224px);
 }
 .card-body {
   max-height: 500px;
@@ -29,4 +29,8 @@
 .table th,
 .table td {
   vertical-align: baseline;
+}
+img {
+  max-width:100px;
+  max-height:100px;
 }

@@ -4,7 +4,7 @@ const pool = new Pool({
   host: "localhost",
   database: "book_db",
   // Sửa pass theo máy của mình
-  password: "331656",
+  password: "123456",
   port: 5432,
 });
 

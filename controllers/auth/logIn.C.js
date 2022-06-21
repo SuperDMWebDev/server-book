@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 router.get("/", async (req, res, next) => {
     res.render('auth/login', {
         title: "Login page",
+        header: () => "none",
         cssCs: () => "login/css",
         scriptCs: () => "login/script",
     })

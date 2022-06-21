@@ -21,7 +21,9 @@ exports.getFiveProducts = async (
 
 exports.getAllProducts = async () => {
   const { rows } = await db.query(
-    `SELECT * from ${products} order by product_id asc`
+    `SELECT * from ${products} p join images i on p.product_id = i.product_id
+    where image_id = 1
+    order by p.product_id asc`
   );
 
   return rows;
