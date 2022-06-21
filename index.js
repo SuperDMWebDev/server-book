@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use(routes);
 app.use(express.static(path.join(__dirname, "public"))); // publish folder public
 
+app.use('*', require("./controllers/site/whoop.C"));
 
 // Server listen in port 3000
 app.listen(port, () => {
