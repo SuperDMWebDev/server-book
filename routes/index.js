@@ -31,8 +31,6 @@ router.use("/login", checkUserIsLogin, loginRoute);
 router.use("/logout", logoutRoute);
 
 // Thông tin cá nhân
-router.use("/profile", profileRoute);
-
-router.use('/err', require("../controllers/site/whoop.C"));
+router.use("/profile", authenToken, profileRoute);
 
 module.exports = router;

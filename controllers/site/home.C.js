@@ -6,7 +6,7 @@ const { getAllAccounts } = require("../../models/account/account.M");
 const { getAllOrders } = require("../../models/order/order.M");
 const { getAllComments } = require("../../models/comment/comment.M");
 const jwt = require('jsonwebtoken');
-
+const { authenToken, checkUserIsLogin } = require('../../middlewares/authorizacation.Mw')
 var username = "";
 var role = 0;
 var idUser = 0;
@@ -26,11 +26,12 @@ const getToken = (req, res) => {
       });
   }
 };
+
 // GET /homepage
 // C la controller
 //
 // / la trnag xmem thong ke
-router.get("/", async (req, res) => {
+router.get("/", authenToken, async (req, res) => {
   try {
     const allProducts = await getAllProducts();
     const allAccounts = await getAllAccounts(); // tru tai khoan admin
