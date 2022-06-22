@@ -43,6 +43,10 @@ const handleError = (e) => {
         errs.passErr = 'Mật không không chính xác';
         return errs;
     }
+    if (e.message == 'Tài khoản đã bị khóa') {
+        errs.passErr = 'Tài khoản đã bị vô hiệu';
+        return errs;
+    }
 
 }
 
@@ -78,13 +82,17 @@ router.post('/', async(req, res) => {
         //console.log("userdata:", dataUser);
         if (dataUser.length == 0) {
             throw Error("Tên đăng nhập không tồn tại");
-        } else {
+        } 
+        else {
             //kiểm tra password 
             //const isPwd = await bcrypt.compare(passvalue, dataUser[0].pwd);
-
+            //console.log(dataUser[0])
             //if (!isPwd) {
             if (passvalue != dataUser[0].pwd) {
                 throw Error("Mật không không chính xác");
+            }
+            else if (dataUser[0].account_status == 0) {
+                throw Error("Tài khoản đã bị khóa");
             }
 
         }
