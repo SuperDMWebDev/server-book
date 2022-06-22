@@ -23,6 +23,23 @@ exports.updateAccount = async (accountUpdate) => {
     `update ${accounts} set account_status=${status}  where account_id=${id}`
   );
 };
+exports.updateProfileAccount = async (account) => {
+  const {
+    id,
+    username,
+    firstname,
+    lastname,
+    phone,
+    address,
+    ward,
+    district,
+    province,
+    password,
+  } = account;
+  await db.query(
+    `update ${accounts} set username='${username}',pwd='${password}', firstname='${firstname}',lastname='${lastname}',phone='${phone}',address='${address}',ward='${ward}',district='${district}',province='${province}' where account_id='${id}'`
+  );
+};
 exports.deleteAccount = async (account_id) => {
   const { id } = account_id;
   console.log("account_id", account_id);
