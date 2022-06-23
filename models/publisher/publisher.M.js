@@ -9,3 +9,8 @@ exports.getAllPublishers = async () => {
 
   return rows;
 };
+exports.addPublisher = async (name) => {
+  await db.query(
+    `insert into ${publishers}(publisher_name) values('${name}') `
+  );
+};

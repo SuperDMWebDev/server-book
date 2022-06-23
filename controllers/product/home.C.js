@@ -6,16 +6,16 @@ const {
   updateAllProducts,
   addNewProduct,
 } = require("../../models/product/products.M");
-
+const { addAuthor } = require("../../models/author/author.M");
 const { showingPrice } = require("../../models/helper/helper.M");
 const {
   getProductDetail,
   getProductImages,
 } = require("../../models/product/productDetail.M");
-const { getAllCategories } = require("../../models/category/categoryM");
-const { getAllPublishers } = require("../../models/publisher/publisherM");
-const { getAllAuthors } = require("../../models/author/authorM");
-const jwt = require('jsonwebtoken');
+const { getAllCategories } = require("../../models/category/category.M");
+const { getAllPublishers, addPublisher } = require("../../models/publisher/publisher.M");
+const { getAllAuthors } = require("../../models/author/author.M");
+const jwt = require("jsonwebtoken");
 
 var username = "";
 var role = 0;
@@ -25,15 +25,15 @@ const getToken = (req, res) => {
   const access_token = req.cookies.jwt;
 
   if (access_token) {
-      const token = access_token.split(' ')[1];
+    const token = access_token.split(" ")[1];
 
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
-          username = data.username
-          idUser = data.id;
-          role = data.role;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+      username = data.username;
+      idUser = data.id;
+      role = data.role;
 
-          return;
-      });
+      return;
+    });
   }
 };
 
@@ -46,7 +46,7 @@ router.get("/", async (req, res) => {
     const allProducts = await getAllProducts();
     //console.log("all products", allProducts);
 
-    getToken(req, res)
+    getToken(req, res);
 
     res.render("product/product", {
       title: "Product Page | Book Store ",
@@ -62,6 +62,16 @@ router.get("/", async (req, res) => {
     throw Error(err);
   }
 });
+router.post("/add-author", async (req, res) => {
+  const text = req.body.author;
+  await addAuthor(text);
+  res.redirect("/product");
+});
+router.post("/add-publisher", async(req,res)=>{
+  const text = req.body.publisher;
+  await addPublisher(text);
+  res.redirect("/product");
+})
 router.post("/add", async (req, res) => {
   try {
     const allValue = req.body;
@@ -91,7 +101,7 @@ router.get("/add", async (req, res, next) => {
     const allAuthors = await getAllAuthors();
     const allPublishers = await getAllPublishers();
 
-    getToken(req, res)
+    getToken(req, res);
 
     res.render("product/addProduct", {
       title: "Product page | Add book",
@@ -124,7 +134,7 @@ router.get("/detail/:id", async (req, res) => {
   cover = images.shift(0).image_link;
 
   try {
-    getToken(req, res)
+    getToken(req, res);
 
     res.render("product/detailProduct", {
       title: "Detail product",

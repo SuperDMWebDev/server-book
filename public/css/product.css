@@ -166,6 +166,9 @@ label {
   min-width: 187px;
 }
 #product_list_cover {
-  max-width:80px;
-  max-height:80px;
+  max-width: 80px;
+  max-height: 80px;
+}
+div#dataTable_filter {
+  float: right;
 }

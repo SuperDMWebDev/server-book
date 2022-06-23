@@ -9,3 +9,6 @@ exports.getAllAuthors = async () => {
 
   return rows;
 };
+exports.addAuthor = async (name) => {
+  await db.query(`insert into ${authors}(author_name) values('${name}') `);
+};
