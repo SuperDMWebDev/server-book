@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllCommentsWithAccount,
+  updateComment,
   deleteComment,
 } = require("../../models/comment/comment.M");
 const { convertDate } = require("../../models/helper/helper.M");
@@ -50,6 +51,24 @@ router.get("/", async (req, res, next) => {
   } catch (e) {
     console.log("e", e);
   }
+});
+router.post("/update", async (req, res) => {
+  const checkBoxValue = req.body;
+  allComment = await getAllCommentsWithAccount();
+  for (let idx = 1; idx <= Object.keys(allComment).length; idx++) {
+    // //console.log("item ", item);
+
+    const index = "cb".concat(idx);
+    if (checkBoxValue[index] == "on"){
+      await updateComment(idx, "comment_status", 1);
+    } else {
+      await updateComment(idx, "comment_status", 0);
+    }
+    // //console.log("check box value index ", index, checkBoxValue[index]);
+    //comment.comment_status = checkBoxValue[index] === "on" ? 1 : 0;
+  };
+
+  return res.redirect("/comment");
 });
 router.get("/delete/:id", async (req, res, next) => {
   try {

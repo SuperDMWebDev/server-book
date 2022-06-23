@@ -8,7 +8,10 @@
       <h6 class="m-0 font-weight-bold text-primary">Comment List</h6>
     </div>
     <div class="card-body">
-
+      <form action="/comment/update" method="POST">
+        <div class="button_container">
+          <button  id="update-button"  type="submit" class="update-button">Update Status</button>
+        </div>
       <div class="table-responsive">
         <table
           class="table table-bordered"
@@ -23,7 +26,7 @@
               <th>Product Id</th>
               <th>Comment content</th>
               <th>Comment time</th>
-              <th></th>
+              <th>Manage</th>
 
             </tr>
             <tbody>
@@ -36,11 +39,19 @@
                     <td>{{comment_time}}</td>
                     <td>
                       <div>
-                        <div>
+                          <input
+                                  type="checkbox" 
+                                  style="flex:1" 
+                                  class="check-status"
+                                  id=cb{{comment_id}}
+                                  name=cb{{comment_id}}
+                                  {{#compareInt comment_status 1}}
+                                  checked
+                                  {{/compareInt}}
+                                />
                           <a class="cursor" href="product/detail/{{product_id}}">
                             <i class="fa-solid fa-eye"></i>                                    
                           </a>
-                        </div>
                         <a class="cursor" href="comment/delete/{{comment_id}}">
                           <i class="fa-solid fa-trash"></i>
                         </a>
@@ -55,5 +66,6 @@
 
         </table>
       </div>
+      </form>
     </div>
   </div>

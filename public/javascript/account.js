@@ -24,10 +24,10 @@ function validateForm() {
   var lastName = document.forms["Form"]["lastname"].value;
   var phoneNumber = document.forms["Form"]["phone"].value;
   var address = document.forms["Form"]["address"].value;
-  var ward = document.forms["Form"]["ward"].value;
-  var district = document.forms["Form"]["district"].value;
-  var province = document.forms["Form"]["province"].value;
-  console.log(province=="");
+  var ward = document.forms["Form"]["form-ward"].value;
+  var district = document.forms["Form"]["form-district"].value;
+  var province = document.forms["Form"]["form-province"].value;
+
   if (
     (userName == null || userName == "")||
     (firstName == null || firstName == "")||
@@ -38,10 +38,9 @@ function validateForm() {
     district == null || district == ""||
     province == null || province == ""
   ) {
-    alert("Hay dien het cac truong con trong");
+    alert("Please fill in blank field(s)");
     return false;
   }
   return false;
 }
 const url = window.location.href;
-

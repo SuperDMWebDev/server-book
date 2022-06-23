@@ -7,18 +7,23 @@
             <h6 class="m-0 font-weight-bold text-primary">Order content </h6>
         </div>
     <div class="card-body">
-    <div class="content-table table-hover">
-      <table class="table">
-        <thead class="thead-light">
+    <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+                <thead>
           <tr>
-            <th class="label" scope="col">Ảnh bìa</th>
-            <th class="label" scope="col">Tên sản phẩm</th>
-            <th class="label" scope="col">Tác giả</th>
-            <th class="label" scope="col">Nhà xuất bản</th>
-            <th class="label" scope="col">Giá thành</th>
-            <th class="label" scope="col">Số lượng</th>
+            <th class="label" scope="col">Cover</th>
+            <th class="label" scope="col">Book name</th>
+            <th class="label" scope="col">Author</th>
+            <th class="label" scope="col">Pulisher</th>
+            <th class="label" scope="col">Price</th>
+            <th class="label" scope="col">Quantity</th>
           </tr>
-        </thead>
+        
 
         <tbody>
           {{#each items}}
@@ -49,12 +54,13 @@
         </tbody>
         <tfoot>
           <tr>
-            <td>Tổng giá tiền:</td>
+            <td>Total charge:</td>
             <td>
               {{sumPrice}}
             </td>
           </tr>
         </tfoot>
+        </thead>
       </table>
     </div>
     </div>

@@ -17,30 +17,34 @@ const handleError = (e) => {
     errs = { userErr: '', passErr: '' };
 
     // phần lỗi tên đăng nhập
-    if (e.message == 'Tên đăng nhập không được để trống') {
-        errs.userErr = 'Tên đăng nhập không được để trống';
+    if (e.message == 'Username cannot be blank') {
+        errs.userErr = 'Username cannot be blank';
         return errs;
     }
-    if (e.message == 'Kí tự đầu tên đăng nhập không bắt đầu từ kí số') {
-        errs.userErr = 'Kí tự đầu tên đăng nhập không bắt đầu từ kí số';
+    if (e.message == 'The first character of the username does not start with a digit') {
+        errs.userErr = 'The first character of the username does not start with a digit';
         return errs;
     }
-    if (e.message == 'Tên đăng nhập không chứa khoảng trắng') {
-        errs.userErr = 'Tên đăng nhập không chứa khoảng trắng';
+    if (e.message == 'Username does not contain spaces') {
+        errs.userErr = 'Username does not contain spaces';
         return errs;
     }
-    if (e.message == 'Tên đăng nhập không tồn tại') {
-        errs.userErr = 'Tên đăng nhập không tồn tại';
+    if (e.message == 'Username does not exist') {
+        errs.userErr = 'Username does not exist';
         return errs;
     }
 
     // phần lỗi password
-    if (e.message == 'Mật khẩu không được để trống') {
-        errs.passErr = 'Mật khẩu không được để trống';
+    if (e.message == 'Password can not be blank') {
+        errs.passErr = 'Password can not be blank';
         return errs;
     }
-    if (e.message == 'Mật không không chính xác') {
-        errs.passErr = 'Mật không không chính xác';
+    if (e.message == 'Password is not correct') {
+        errs.passErr = 'Password is not correct';
+        return errs;
+    }
+    if (e.message == 'Account has been locked') {
+        errs.passErr = 'Tài khoản đã bị vô hiệu';
         return errs;
     }
 
@@ -65,26 +69,30 @@ router.post('/', async(req, res) => {
     try {
 
         if (uservalue === '') {
-            throw Error("Tên đăng nhập không được để trống");
+            throw Error("Username cannot be blank");
         }
         if (errs.userErr != '') {
             throw Error(errs.userErr);
         }
         if (passvalue === '') {
-            throw Error("Mật khẩu không được để trống");
+            throw Error("Password can not be blank");
         }
         // Kiểm tra tài khoản user đã tồn tại trong db hay chưa
         const dataUser = await getOne('username', uservalue);
         //console.log("userdata:", dataUser);
         if (dataUser.length == 0) {
-            throw Error("Tên đăng nhập không tồn tại");
-        } else {
+            throw Error("Username does not exist");
+        } 
+        else {
             //kiểm tra password 
             //const isPwd = await bcrypt.compare(passvalue, dataUser[0].pwd);
-
+            //console.log(dataUser[0])
             //if (!isPwd) {
             if (passvalue != dataUser[0].pwd) {
-                throw Error("Mật không không chính xác");
+                throw Error("Password is not correct");
+            }
+            else if (dataUser[0].account_status == 0) {
+                throw Error("Account has been locked");
             }
 
         }

@@ -26,7 +26,7 @@
       target="__blank"
     >Notifications</a>
   </nav> }}
-      <div class="row top-100">
+      <div class="row top-45">
         {{! <div class="col-xl-4">
       <!-- Profile picture card-->
       <div class="card mb-4 mb-xl-0">
@@ -49,7 +49,7 @@
         <div class="col-xl-12">
           <!-- Account details card-->
           <div class="add-account card mb-4">
-            <div class="card-header">Account Details</div>
+            <div class="card-header">Add Acocunt</div>
             <div class="card-body">
               <form
                 action="/account/add"
@@ -107,9 +107,8 @@
                   </div>
                 </div>
                 <!-- Form Row        -->
-                <div class="row gx-3 mb-3">
+                <div class="mb-3">
                   <!-- Form Group (organization name)-->
-                  <div class="col-md-6">
                     <label class="small mb-1" for="inputPhone">Phone number</label>
                     <input
                       class="form-control"
@@ -120,10 +119,11 @@
                       value=""
                       required
                     />
-                  </div>
                   <!-- Form Group (location)-->
-                  <div class="col-md-6">
-                    <label class="small mb-1" for="inputAddress">Address</label>
+                </div>
+                <!-- Form Row-->
+                <div class="mb-3">
+                    <label class="small mb-1" for="inputAddress">Street</label>
                     <input
                       class="form-control"
                       id="inputAddress"
@@ -134,56 +134,46 @@
                       required
                     />
                   </div>
-                </div>
 
-                <div class="mb-3">
-                  <label class="small mb-1" for="inputWard">Ward</label>
-                  <input
-                    class="form-control"
-                    id="inputWard"
-                    type="text"
-                    placeholder="Enter your ward"
-                    name="ward"
-                    value=""
-                    required
-                  />
-                </div>
-                <!-- Form Row-->
-                <div class="row gx-3 mb-3">
                   <!-- Form Group (phone number)-->
-                  <div class="col-md-6">
-                    <label
-                      class="small mb-1"
-                      for="inputDistrict"
-                    >District</label>
-                    <input
-                      class="form-control"
-                      id="inputDistrict"
-                      type="text"
-                      placeholder="Enter your district"
-                      name="district"
-                      value=""
-                      required
-                    />
+                  <div class="form-select-add form-item">
+                      <div class="form-group mb-3">
+                          <label class="small mb-1" for="province ">Province</label>
+                          <select name="province" class="form-select form-province" >
+                              <option select="selected ">
+                              {{#if account}}
+                                  {{account.province}}
+                              {{else}}
+                                  Rỗng
+                              {{/if}}
+                              </option>
+                          </select>
+                      </div>
+                      <div class="form-group mb-3">
+                          <label class="small mb-1" for="district ">District</label>
+                          <select name="district" class="form-select form-district ">
+                              <option>
+                                  {{#if account.district}}
+                                  {{account.district}}
+                                  {{else}}
+                                  Rỗng
+                                  {{/if}}
+                                  </option>
+                          </select>
+                      </div>
+                      <div class="form-group mb-3">
+                          <label class="small mb-1" for="ward ">Ward</label>
+                          <select name="ward" class="form-select form-ward ">
+                              <option>
+                                  {{#if account.ward}}
+                                  {{account.ward}}
+                                  {{else}}
+                                  Rỗng
+                                  {{/if}}</option>
+                          </select>
+                      </div>
                   </div>
-                  <!-- Form Group (birthday)-->
-                  <div class="col-md-6">
-                    <label
-                      class="small mb-1"
-                      for="inputProvince"
-                    >Province</label>
-                    <input
-                      class="form-control"
-                      id="inputProvince"
-                      type="text"
-                      name="birthday"
-                      placeholder="Enter your province"
-                      name="province"
-                      value=""
-                      required
-                    />
-                  </div>
-                </div>
+
                 <!-- Save changes button-->
                 <button class="btn btn-primary" id="save" type="submit">Save
                   changes</button>

@@ -53,8 +53,7 @@ function checkInputs() {
     errs = { userErr: '' };
     // check validation userName
     if (userNameValue === '') {
-
-        errs.userErr = "Tên đăng nhập không được để trống";
+        errs.userErr = "Username cannot be blank";
     } else {
         errs.userErr = isUserName(userNameValue);
     }
@@ -78,13 +77,13 @@ function isUserName(userN) {
         var temp = userN.charCodeAt(0);
 
         if (48 <= temp && temp <= 57) {
-            err = 'Kí tự đầu tên đăng nhập không bắt đầu từ kí số';
+            err = 'The first character of the username does not start with a digit';
             return err;
         }
 
         for (var i = 1; i < userN.length; i++) {
             if (userN[i] == " ") {
-                err = 'Tên đăng nhập không chứa khoảng trắng';
+                err = 'Username does not contain spaces';
                 return err;
             }
         }

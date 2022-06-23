@@ -5,7 +5,7 @@ var times = 0;
 
 const provincesHTML = document.querySelector(".form-province");
 
-const btnPayment = document.querySelector("#btn-payment");
+//const btnPayment = document.querySelector("#btn-payment");
 
 
 window.addEventListener("load", () => {

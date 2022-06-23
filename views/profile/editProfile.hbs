@@ -25,7 +25,7 @@
       target="__blank"
     >Notifications</a>
   </nav> }}
-  <div class="row top-100">
+  <div class="row top-45">
     {{! <div class="col-xl-4">
       <!-- Profile picture card-->
       <div class="card mb-4 mb-xl-0">
@@ -60,7 +60,8 @@
                 style="visibility:hidden"
                 type="hidden"
               />
-              <div class="mb-3">
+              <div class="row gx-3 mb-3">
+                <div class="col-md-6">
                 <label class="small mb-1" for="inputUsername">Username (how your
                   name will appear to other users on the site)</label>
                 <input
@@ -71,8 +72,19 @@
                   name="username"
                   value="{{username}}"
                 />
+                </div>
+                <div class="col-md-6">
+                  <label class="small mb-1" for="inputPhone">Phone number</label>
+                  <input
+                    class="form-control"
+                    id="inputPhone"
+                    type="tel"
+                    placeholder="Enter your phone"
+                    name="phone"
+                    value="{{phone}}"
+                  />
+                </div>
               </div>
-
               <!-- Form Row-->
               <div class="row gx-3 mb-3">
                 <!-- Form Group (first name)-->
@@ -100,33 +112,6 @@
                   />
                 </div>
               </div>
-              <!-- Form Row        -->
-              <div class="row gx-3 mb-3">
-                <!-- Form Group (organization name)-->
-                <div class="col-md-6">
-                  <label class="small mb-1" for="inputPhone">Phone number</label>
-                  <input
-                    class="form-control"
-                    id="inputPhone"
-                    type="tel"
-                    placeholder="Enter your phone"
-                    name="phone"
-                    value="{{phone}}"
-                  />
-                </div>
-                <!-- Form Group (location)-->
-                <div class="col-md-6">
-                  <label class="small mb-1" for="inputWard">Ward</label>
-                  <input
-                    class="form-control"
-                    id="inputWard"
-                    type="text"
-                    placeholder="Enter your ward"
-                    name="ward"
-                    value="{{ward}}"
-                  />
-                </div>
-              </div>
 
               <div class="mb-3">
                 <label class="small mb-1" for="inputAddress">Address</label>
@@ -139,31 +124,49 @@
                   value="{{address}}"
                 />
               </div>
-              <div class="row gx-3 mb-3">
-                <div class="col-md-6">
-                  <label class="small mb-1" for="inputDistrict">District</label>
-                  <input
-                    class="form-control"
-                    id="inputDistrict"
-                    type="text"
-                    placeholder="Enter your district"
-                    name="district"
-                    value="{{district}}"
-                  />
-                </div>
-                <div class="col-md-6">
-                  <label class="small mb-1" for="inputProvince">Province</label>
-                  <input
-                    class="form-control"
-                    id="inputProvince"
-                    type="text"
-                    name="province"
-                    placeholder="Enter your province"
-                    name="province"
-                    value="{{province}}"
-                  />
-                </div>
-              </div>
+              <div class="form-select-add form-item row mb-3">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                          <label class="small mb-1" for="province ">Province</label>
+                          <select name="province" class="form-select form-province" >
+                              <option select="selected ">
+                              {{#if province}}
+                                  {{province}}
+                              {{else}}
+                                  Rỗng
+                              {{/if}}
+                              </option>
+                          </select>
+                      </div>
+                      </div>
+                      <div class="col-md-4">
+                      <div class="form-group">
+                          <label class="small mb-1" for="district ">District</label>
+                          <select name="district" class="form-select form-district ">
+                              <option>
+                                  {{#if district}}
+                                  {{district}}
+                                  {{else}}
+                                  Rỗng
+                                  {{/if}}
+                                  </option>
+                          </select>
+                      </div>
+                      </div>
+                      <div class="col-md-4">
+                      <div class="form-group">
+                          <label class="small mb-1" for="ward ">Ward</label>
+                          <select name="ward" class="form-select form-ward ">
+                              <option>
+                                  {{#if ward}}
+                                  {{ward}}
+                                  {{else}}
+                                  Rỗng
+                                  {{/if}}</option>
+                          </select>
+                      </div>
+                      </div>
+                  </div>
               <div class="mb-3">
                 <label class="small mb-1" for="inputPwd">Password</label>
                 <input

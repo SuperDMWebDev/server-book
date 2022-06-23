@@ -121,6 +121,8 @@ router.post("/add", async (req, res, next) => {
     getToken(req, res)
     const allAccounts = await getAllAccounts();
     
+    res.redirect("/account")
+    /*
     res.render("account/account", {
       title: "Account page",
       user_name: username,
@@ -131,6 +133,7 @@ router.post("/add", async (req, res, next) => {
       scriptCs: () => "account/script",
       allAccounts: allAccounts,
     });
+    */
   } catch (err) {
     throw Error(err);
   }

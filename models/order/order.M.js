@@ -35,8 +35,7 @@ const totalItems = async(search) => {
 }
 
 // lay toan bo don hang
-exports.getOrders = async ({ page, per_page = 10, search }) => {
-  const offset = (page - 1) * per_page;
+exports.getOrders = async () => {
 
   const { rows } = await db.query(`
     select orders.order_id, accounts.username, orders.order_total, orders.order_time,
@@ -44,14 +43,9 @@ exports.getOrders = async ({ page, per_page = 10, search }) => {
     orders.order_a as fulladdress,
     orders.order_phone, orders.order_status
     from orders, accounts
-    where orders.account_id = accounts.account_id  AND orders.order_phone like '%${search}%'
-    order by orders.order_status, orders.order_id
-    LIMIT ${per_page} OFFSET ${offset}`);
-
-  const total_items = await totalItems(search);
-  const total_page = total_items % per_page === 0 ? (total_items / per_page) : Math.floor(total_items / per_page) + 1;
-
-  return { allOrders: rows, total_page: total_page };
+    where orders.account_id = accounts.account_id
+    order by orders.order_id`);
+  return rows
 }
 
 exports.cancelOrder = async(o_id) => {

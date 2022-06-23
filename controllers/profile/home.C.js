@@ -30,7 +30,6 @@ router.get("/", async (req, res) => {
   getToken(req, res);
   account_id = idUser;
 
-  console.log(account_id);
   const infoAccount = await getOneAccount(account_id);
   //   console.log("infoAccount", infoAccount);
   res.render("profile/profile", {
@@ -64,7 +63,7 @@ router.get("/edit", async (req, res) => {
   });
 });
 router.post("/", async (req, res) => {
-  console.log("vao post", req.body);
+  //console.log("vao post", req.body);
   await updateProfileAccount(req.body);
   const infoAccount = await getOneAccount(account_id);
   //   console.log("infoAccount", infoAccount);
