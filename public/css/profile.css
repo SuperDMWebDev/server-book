@@ -4,3 +4,32 @@
     top: 0px;
     width: calc(100% - 224px);
   }
+.wrapper {
+  display: flex;
+}
+
+.table-responsive {
+  padding-left: 20px;
+}
+.none {
+  display: none;
+}
+.row-20 {
+  margin-top: 128px;
+}
+.add-account {
+  width: 700px;
+}
+label {
+  white-space: nowrap;
+  margin-right: 20px;
+}
+.cursor {
+  cursor: pointer;
+}
+.top-100 {
+  margin-top: 100px;
+}
+.top-45 {
+  margin-top: 45px;
+}

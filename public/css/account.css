@@ -1,6 +1,6 @@
 .row > div:nth-child(1) {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: start;
 }
 .row > div:nth-child(1) label {
@@ -17,7 +17,7 @@ tr td:nth-child(5) {
   align-items: center;
   justify-content: space-between;
 }
-.row > div:nth-child(1) {
+.row > div:nth-child(3) {
   display: flex;
   align-items: center;
   justify-content: start;

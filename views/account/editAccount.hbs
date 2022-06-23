@@ -25,7 +25,7 @@
       target="__blank"
     >Notifications</a>
   </nav> }}
-      <div class="row top-100">
+      <div class="row top-45">
         {{! <div class="col-xl-4">
       <!-- Profile picture card-->
       <div class="card mb-4 mb-xl-0">
@@ -49,7 +49,7 @@
           <!-- Account details card-->
           {{#with oneAccount}}
             <div class="card mb-4">
-              <div class="card-header">Account Details</div>
+              <div class="card-header">Change account status</div>
               <div class="card-body">
                 <form action="/account" method="POST">
                   <!-- Form Group (username)-->
@@ -59,9 +59,9 @@
                     style="visibility:hidden"
                     type="hidden"
                   />
-                  <div class="mb-3">
-                    <label class="small mb-1" for="inputUsername">Username (how
-                      your name will appear to other users on the site)</label>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                    <label class="small mb-1" for="inputUsername">Username</label>
                     <input
                       class="form-control"
                       id="inputUsername"
@@ -71,6 +71,19 @@
                       value={{username}}
                       disabled="disabled"
                     />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="small mb-1" for="inputPhone">Phone number</label>
+                      <input
+                        class="form-control"
+                        id="inputPhone"
+                        type="tel"
+                        placeholder="Enter your phone"
+                        name="phone"
+                        value={{phone}}
+                        disabled="disabled"
+                      />
+                    </div>
                   </div>
                   <!-- Form Row-->
                   <div class="row gx-3 mb-3">
@@ -102,22 +115,8 @@
                     </div>
                   </div>
                   <!-- Form Row        -->
-                  <div class="row gx-3 mb-3">
-                    <!-- Form Group (organization name)-->
-                    <div class="col-md-6">
-                      <label class="small mb-1" for="inputPhone">Phone number</label>
-                      <input
-                        class="form-control"
-                        id="inputPhone"
-                        type="tel"
-                        placeholder="Enter your phone"
-                        name="phone"
-                        value={{phone}}
-                        disabled="disabled"
-                      />
-                    </div>
-                    <!-- Form Group (location)-->
-                    <div class="col-md-6">
+                  <div class="row mb-3">
+                  <div class="col mb-12">
                       <label
                         class="small mb-1"
                         for="inputAddress"
@@ -131,10 +130,11 @@
                         value={{address}}
                         disabled="disabled"
                       />
-                    </div>
+                      </div>
                   </div>
-
-                  <div class="mb-3">
+                  <!-- Form Row-->
+                  <div class="row mb-3">
+                    <div class="col-md-4">
                     <label class="small mb-1" for="inputWard">Ward</label>
                     <input
                       class="form-control"
@@ -146,10 +146,8 @@
                       disabled="disabled"
                     />
                   </div>
-                  <!-- Form Row-->
-                  <div class="row gx-3 mb-3">
                     <!-- Form Group (phone number)-->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <label
                         class="small mb-1"
                         for="inputDistrict"
@@ -165,7 +163,7 @@
                       />
                     </div>
                     <!-- Form Group (birthday)-->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <label
                         class="small mb-1"
                         for="inputProvince"
@@ -182,7 +180,8 @@
                       />
                     </div>
                   </div>
-                  <div class="mb-3">
+                  <div class="row mb-3">
+                    <div class="col">
                     <label class="small mb-1" for="inputStatus">Status</label>
                     <input
                       class="form-control"
@@ -192,6 +191,7 @@
                       name="status"
                       value={{account_status}}
                     />
+                  </div>
                   </div>
                   <!-- Save changes button-->
                   <button class="btn btn-primary" id="save" type="submit">Save

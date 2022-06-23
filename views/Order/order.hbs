@@ -1,45 +1,37 @@
-
-<div>
     <div id="toast-msg">
     </div>
     <div class="card shadow mb-4 top-45">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Order list</h6>
         </div>
-      <div class="card-body">
-        <div class="nav__account-search">
-            <form class="form-inline" action="" method="get">
-                <input class="form-control mr-sm-2" type="search" id="search" name="search" placeholder="Search by customer's phone" aria-label="Search"
-                {{#if search}} value="{{search}}" {{/if}}>
-                <button class="btn btn-outline-success my-2 my-sm-0 search-icon btn-primary" 
-                style="border:none; background:##688dfd"
-                type="submit"><i class="fas fa-search"></i></button>
-            </form>
-            
-        </div>
-        
+      <div class="card-body">        
         {{#if notFound}}
               <div id="notfound">
                   <i class="fa-solid fa-triangle-exclamation"></i>
                   <h2>
-                      Không tìm thấy sản phẩm phù hợp  
+                      No matching products found
                   </h2>
               </div>
         {{else}}
-        <div class="content-table table-hover">
         
-            <table class="table table__content table-bordered table-hover">
-                <thead class="table__content-thead">
+            <div class="table-responsive">
+        <table
+          class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0"
+        >
+                <thead>
                     <tr>
                         <th>ID</th>
-                        <th scope="col">Tổng tiền</th>
-                        <th scope="col">Thời gian</th>
-                        <th scope="col">SĐT</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Trạng thái</th>
-                        <th scope="col">Chỉnh sửa</th>
+                        <th scope="col">Total charge</th>
+                        <th scope="col">Order time</th>
+                        <th scope="col">Phone number</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Update</th>
                     </tr>
-                </thead>
+                
 
                 <tbody>
                     {{#each AllOrders}}
@@ -54,7 +46,7 @@
                             <div class="button-edit">
                               <a href="/order/detail/{{this.order_id}}" style="color:white;" onfocus="return false" target="_blank">
                                   <button class="btn btn__item btn--blue" style="padding: 5px; font-size:15px">
-                                      Chi tiết
+                                      Detail
                                   </button>
                               </a>
                             </div>
@@ -66,7 +58,7 @@
                                   data-o_status="{{this.order_status}}" data-target="#updateModal"
                                   {{#compareString this.order_status "Đã hủy"}}disabled{{/compareString}}
                                   {{#compareString this.order_status "Đã giao"}}disabled{{/compareString}}>
-                                  Cập nhật
+                                  Update
                               </button>
                             </div>
                             <div class="button-edit">
@@ -74,27 +66,17 @@
                                   data-toggle="modal" data-o_id="{{this.order_id}}" data-target="#removeModal"
                                   {{#compareString this.order_status "Đã hủy"}}disabled{{/compareString}}
                                   {{#compareString this.order_status "Đã giao"}}disabled{{/compareString}}>
-                                  Hủy
+                                  Cancel
                               </button>
                             </div>
                         </td>
                     </tr>
                     {{/each}}
+                    </thead>
                 </tbody>
             </table>
-        
-        </div>
-      {{/if}}
-      <div class="page__navigation">
-            <ul class="pagination page">
-                {{#forN total_page}}
-                <li class="pag__item">              
-                    <a class="pag__link {{#compareInt this ../page}} pag__link--active{{/compareInt}}"
-                    href="/order/?page={{this}}&search={{../search}}">{{this}}</a>
-                </li>
-                {{/forN}}
-            </ul>
-      </div>
+            
     </div>
+{{/if}}
 </div>
 </div>

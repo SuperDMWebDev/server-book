@@ -44,7 +44,7 @@ const toast = ({ title = "", message = "", type = "info", duration }) => {
 
 function showSuccessToast(message) {
     toast({
-        title: "Thành công!",
+        title: "Succeeded!",
         message: message,
         type: "success",
         duration: 3000,
@@ -53,7 +53,7 @@ function showSuccessToast(message) {
 
 function showErrorToast(message) {
     toast({
-        title: "Thất bại!",
+        title: "Failed!",
         message: message,
         type: "error",
         duration: 3000,

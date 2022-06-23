@@ -1,27 +1,3 @@
-.row > div:nth-child(1) {
-  display: flex;
-  align-items: flex-end;
-  justify-content: start;
-}
-.row > div:nth-child(1) label {
-  display: flex;
-}
-.row > div:nth-child(2) {
-  display: flex; /* justify-self: flex-end; */
-  align-self: center;
-  justify-content: end;
-}
-tr td:nth-child(5) {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.row > div:nth-child(1) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .wrapper {
   display: flex;
 }

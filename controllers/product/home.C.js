@@ -135,7 +135,7 @@ router.get("/detail/:id", async (req, res) => {
       user_id: idUser,
       role_id: role,
       header: () => "header",
-      cssCs: () => "product/css",
+      cssCs: () => "product/cssDetail",
       scriptCs: () => "product/script",
     });
   } catch (err) {

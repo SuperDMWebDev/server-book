@@ -34,3 +34,25 @@ img {
   max-width:100px;
   max-height:100px;
 }
+.top-100 {
+  margin-top: 100px;
+}
+.top-45 {
+  margin-top: 45px;
+}
+
+.table-responsive {
+  padding-left: 20px;
+}
+.btn.btn__item.btn--red {
+  background-color: red;
+  color: black;
+}
+.btn.btn__item.btn--blue {
+  background-color: blue;
+  color: black;
+}
+.btn.btn__item.btn--green {
+  background-color: green;
+  color: black;
+}

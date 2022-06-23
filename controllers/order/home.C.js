@@ -27,10 +27,9 @@ const getToken = (req, res) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    var { del, update, page = 1, search = "", update } = req.query;
-    search = search.trim();
+    var { del, update } = req.query;
 
-    let { allOrders, total_page }= await getOrders({ page, search });
+    let allOrders =  await getOrders();
     getToken(req, res)
 
     if (allOrders.length == 0) {
@@ -43,9 +42,6 @@ router.get("/", async (req, res, next) => {
           cssCs: () => "order/css",
           scriptCs: () => "order/script",
           allOrders,
-          page: page,
-          total_page,
-          search,
           del,
           update,
           notFound: 1,
@@ -101,15 +97,14 @@ router.put('/:o_id', async(req, res) => {
   let o_d = req.body.o_d;
   let o_w = req.body.o_w;
   let o_status = req.body.o_status;
-  let { page = 1, search = ""} = req.query;
   // Sửa bảng
   try {
       let updatedRow = await updateOrder(o_id, o_phone, o_a, o_p, o_d, o_w, o_status);
-      res.redirect(`/order/?page=${page}&search=${search}&update=success`);
+      res.redirect(`/order/?update=success`);
 
   } catch (err) {
       console.error("error for update order item: ", err);
-      res.redirect(`/order/?page=${page}&search=${search}&update=error`);
+      res.redirect(`/order/?update=error`);
   }
 });
 
@@ -117,14 +112,12 @@ router.put('/:o_id', async(req, res) => {
 router.delete('/:o_id', async(req, res) => {
   let o_id = req.params.o_id;
 
-  const { page = 1, search = ""} = req.query;
-
   try {
       let cancelRow = await cancelOrder(o_id);
-      res.redirect(`/order?page=${page}&search=${search}&del=success`);
+      res.redirect(`/order?del=success`);
   } catch (err) {
       console.error("error for delete order item: ", err);
-      res.redirect(`/order?page=${page}&search=${search}&del=error`);
+      res.redirect(`/order?del=error`);
 
   }
 });
