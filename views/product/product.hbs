@@ -5,26 +5,17 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
               
-            <div class="card-header py-3">
+            {{!-- <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
             <form name="formProduct" action="/product/update" method="POST">
             <div class="button_container">
             <button  id="update-button"  type="submit" class="update-button">Update Status</button>
-            <a id="add-button" data-toggle="collapse" href="#addAuthor" role="button" aria-expanded="false" aria-controls="addAuthor">Add author</a>
-            <a id="add-button" data-toggle="collapse" href="#addPublisher" role="button" aria-expanded="false" aria-controls="addPublisher">Add publisher</a>
             <a href="/product/add">
             <input id="add-button" type="button" value="Add product"/>
             </a>
             </div>
-             <div class="collapse" id="addAuthor">
-                  <input type="text" name="author" id="add-author" placeholder="Hay nhap ten tac gia"/>
-                  <button id="submit-author" type="button">Them tac gia</button>
-              </div>
-             <div class="collapse" id="addPublisher">
-                  <input type="text" name="publisher" id="add-publisher" placeholder="Hay nhap nha xuat ban"/>
-                  <button id="submit-publisher" type="button">Them nha xuat ban</button>
-              </div>
+            --}}
 
             <!-- them tac gia-->
            
@@ -34,12 +25,23 @@
             </div>
             
             <div class="card-body">
-              <form action="/product/update" method="POST">
+              <form name="formProduct" action="/product/update" method="POST">
                 <div class="button_container">
                   <button  id="update-button"  type="submit" class="update-button">Update Status</button>
                 <a href="/product/add">
                   <input className="cusor" type="button" id="add-button" value="Add product"/>
                 </a>
+                <a id="add-button" data-toggle="collapse" href="#addAuthor" role="button" aria-expanded="false" aria-controls="addAuthor"><button>Add author</button></a>
+                <a id="add-button" data-toggle="collapse" href="#addPublisher" role="button" aria-expanded="false" aria-controls="addPublisher"><button>Add publisher</button></a>
+
+                </div>
+                  <div class="collapse" id="addAuthor">
+                  <input type="text" name="author" id="add-author" placeholder="Hay nhap ten tac gia"/>
+                  <button id="submit-author" type="button">Them tac gia</button>
+              </div>
+               <div class="collapse" id="addPublisher">
+                  <input type="text" name="publisher" id="add-publisher" placeholder="Hay nhap nha xuat ban"/>
+                  <button id="submit-publisher" type="button">Them nha xuat ban</button>
                 </div>
               <div class="table-responsive">
                 <table
