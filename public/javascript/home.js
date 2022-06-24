@@ -24,6 +24,7 @@ var data = [
     pointStrokeColors: ["black"],
     lineColors: ["gray", "red"],
   };
+
 config.element = "area-chart";
 Morris.Area(config);
 config.element = "pie-chart";

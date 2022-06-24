@@ -5,6 +5,7 @@
 }
 .row > div:nth-child(1) label {
   display: flex;
+  gap: 5px;
 }
 .row > div:nth-child(2) {
   display: flex; /* justify-self: flex-end; */
@@ -31,8 +32,8 @@
   vertical-align: baseline;
 }
 img {
-  max-width:100px;
-  max-height:100px;
+  max-width: 100px;
+  max-height: 100px;
 }
 .top-100 {
   margin-top: 100px;
@@ -40,19 +41,30 @@ img {
 .top-45 {
   margin-top: 45px;
 }
-
+.btn__item {
+  min-width: 60px;
+  margin-bottom: 5px;
+  color: #fff;
+}
 .table-responsive {
   padding-left: 20px;
 }
 .btn.btn__item.btn--red {
   background-color: red;
-  color: black;
+  color: #fff;
 }
 .btn.btn__item.btn--blue {
   background-color: blue;
-  color: black;
+  color: #fff;
 }
 .btn.btn__item.btn--green {
   background-color: green;
-  color: black;
+  color: #fff;
+}
+
+.table-responsive {
+  overflow-x: hidden;
+}
+.button-edit {
+  text-align: center;
 }

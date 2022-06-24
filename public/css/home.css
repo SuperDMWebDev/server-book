@@ -6,3 +6,12 @@
   top: 0px;
   left: 224px;
 }
+#content {
+  width: 83vw;
+}
+.sticky-footer {
+  display: none;
+}
+.pie-chart {
+  text-align: center;
+}
