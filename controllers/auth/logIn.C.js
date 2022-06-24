@@ -44,7 +44,7 @@ const handleError = (e) => {
         return errs;
     }
     if (e.message == 'Account has been locked') {
-        errs.passErr = 'Tài khoản đã bị vô hiệu';
+        errs.passErr = 'Account has been locked';
         return errs;
     }
 
