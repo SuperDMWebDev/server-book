@@ -137,3 +137,6 @@ label {
   margin-left: 20px;
   margin-top: 10px;
 }
+.input-group{
+  display: none;
+}

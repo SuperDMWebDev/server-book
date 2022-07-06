@@ -286,3 +286,6 @@ div#dataTable_filter {
 .table-responsive {
   overflow-x: hidden;
 }
+.input-group{
+  display: none;
+}

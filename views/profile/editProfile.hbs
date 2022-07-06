@@ -62,16 +62,18 @@
               />
               <div class="row gx-3 mb-3">
                 <div class="col-md-6">
-                <label class="small mb-1" for="inputUsername">Username (how your
-                  name will appear to other users on the site)</label>
-                <input
-                  class="form-control"
-                  id="inputUsername"
-                  type="text"
-                  placeholder="Enter your username"
-                  name="username"
-                  value="{{username}}"
-                />
+                  <label class="small mb-1" for="inputUsername">Username (how
+                    your name will appear to other users on the site)</label>
+                  <input
+                    class="form-control"
+                    id="inputUsername"
+                    type="text"
+                    placeholder="Enter your username"
+                    name="username"
+                    value="{{username}}"
+                    disabled
+                    required
+                  />
                 </div>
                 <div class="col-md-6">
                   <label class="small mb-1" for="inputPhone">Phone number</label>
@@ -82,6 +84,7 @@
                     placeholder="Enter your phone"
                     name="phone"
                     value="{{phone}}"
+                    required
                   />
                 </div>
               </div>
@@ -97,6 +100,7 @@
                     placeholder="Enter your first name"
                     name="firstname"
                     value="{{firstname}}"
+                    required
                   />
                 </div>
                 <!-- Form Group (last name)-->
@@ -109,6 +113,7 @@
                     name="lastname"
                     placeholder="Enter your last name"
                     value="{{lastname}}"
+                    required
                   />
                 </div>
               </div>
@@ -122,51 +127,52 @@
                   placeholder="Enter your address"
                   name="address"
                   value="{{address}}"
+                  required
                 />
               </div>
               <div class="form-select-add form-item row mb-3">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                          <label class="small mb-1" for="province ">Province</label>
-                          <select name="province" class="form-select form-province" >
-                              <option select="selected ">
-                              {{#if province}}
-                                  {{province}}
-                              {{else}}
-                                  Rỗng
-                              {{/if}}
-                              </option>
-                          </select>
-                      </div>
-                      </div>
-                      <div class="col-md-4">
-                      <div class="form-group">
-                          <label class="small mb-1" for="district ">District</label>
-                          <select name="district" class="form-select form-district ">
-                              <option>
-                                  {{#if district}}
-                                  {{district}}
-                                  {{else}}
-                                  Rỗng
-                                  {{/if}}
-                                  </option>
-                          </select>
-                      </div>
-                      </div>
-                      <div class="col-md-4">
-                      <div class="form-group">
-                          <label class="small mb-1" for="ward ">Ward</label>
-                          <select name="ward" class="form-select form-ward ">
-                              <option>
-                                  {{#if ward}}
-                                  {{ward}}
-                                  {{else}}
-                                  Rỗng
-                                  {{/if}}</option>
-                          </select>
-                      </div>
-                      </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="small mb-1" for="province ">Province</label>
+                    <select name="province" class="form-select form-province">
+                      <option select="selected ">
+                        {{#if province}}
+                          {{province}}
+                        {{else}}
+                          Rỗng
+                        {{/if}}
+                      </option>
+                    </select>
                   </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="small mb-1" for="district ">District</label>
+                    <select name="district" class="form-select form-district">
+                      <option>
+                        {{#if district}}
+                          {{district}}
+                        {{else}}
+                          Rỗng
+                        {{/if}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="small mb-1" for="ward ">Ward</label>
+                    <select name="ward" class="form-select form-ward">
+                      <option>
+                        {{#if ward}}
+                          {{ward}}
+                        {{else}}
+                          Rỗng
+                        {{/if}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div class="mb-3">
                 <label class="small mb-1" for="inputPwd">Password</label>
                 <input
@@ -176,6 +182,7 @@
                   placeholder="Enter your password"
                   name="password"
                   value="{{pwd}}"
+                  required
                 />
               </div>
 

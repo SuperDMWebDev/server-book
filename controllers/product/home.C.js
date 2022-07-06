@@ -13,7 +13,10 @@ const {
   getProductImages,
 } = require("../../models/product/productDetail.M");
 const { getAllCategories } = require("../../models/category/category.M");
-const { getAllPublishers, addPublisher } = require("../../models/publisher/publisher.M");
+const {
+  getAllPublishers,
+  addPublisher,
+} = require("../../models/publisher/publisher.M");
 const { getAllAuthors } = require("../../models/author/author.M");
 const jwt = require("jsonwebtoken");
 
@@ -64,33 +67,47 @@ router.get("/", async (req, res) => {
 });
 router.post("/add-author", async (req, res) => {
   const text = req.body.author;
+  const allAuthors = await getAllAuthors();
+  for (let i = 0; i < allAuthors.length; i++) {
+    if (allAuthors[i].author_name === text) {
+      res.redirect("/product");
+      return;
+    }
+  }
+
   await addAuthor(text);
   res.redirect("/product");
 });
-router.post("/add-publisher", async(req,res)=>{
+router.post("/add-publisher", async (req, res) => {
   const text = req.body.publisher;
+  const allPublishers = await getAllPublishers();
+  for (let i = 0; i < allPublishers.length; i++) {
+    if (allPublishers[i].author_name === text) {
+      res.redirect("/product");
+      return;
+    }
+  }
   await addPublisher(text);
   res.redirect("/product");
-})
+});
 router.post("/add", async (req, res) => {
   try {
     const allValue = req.body;
-    // //console.log("cb value ", checkBoxValue.cb1);
-    //console.log("all value", allValue);
-    // //console.log("all products after ", newProducts);
+    console.log("all value", allValue);
     const allProducts = await getAllProducts();
+    for (let i = 0; i < allProducts.length; i++) {
+      if (
+        allProducts[i].product_name == allValue.name &&
+        allProducts[i].author_id == allValue.author &&
+        allProducts[i].publisher_id == allValue.publisher
+      ) {
+        console.log("exist product");
+        res.redirect("/product");
+        return;
+      }
+    }
     await addNewProduct(allValue, allProducts.length);
     return res.redirect("/product");
-    // res.render("product/product", {
-    //   title: "Product Page | Blue Book Store ",
-    //   header: () => "header",
-    //   user_name: username,
-    // user_id: idUser,
-    //  role_id: role,
-    //   cssCs: () => "product/css",
-    //   scriptCs: () => "product/script",
-    //   allProducts: newProducts,
-    // });
   } catch (err) {
     throw Error(err);
   }

@@ -147,3 +147,6 @@ label {
   display: flex;
   gap: 5px;
 }
+.input-group {
+  display: none;
+}

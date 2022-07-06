@@ -8,7 +8,7 @@ const {
   deleteAccount,
   addAccount,
 } = require("../../models/account/account.M");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 var username = "";
 var role = 0;
@@ -18,23 +18,23 @@ const getToken = (req, res) => {
   const access_token = req.cookies.jwt;
 
   if (access_token) {
-      const token = access_token.split(' ')[1];
+    const token = access_token.split(" ")[1];
 
-      jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
-          username = data.username
-          idUser = data.id;
-          role = data.role;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
+      username = data.username;
+      idUser = data.id;
+      role = data.role;
 
-          return;
-      });
+      return;
+    });
   }
 };
 
 router.get("/", async (req, res, next) => {
   try {
     const allAccounts = await getAllAccounts();
-    
-    getToken(req, res)
+
+    getToken(req, res);
 
     res.render("account/account", {
       title: "Account page",
@@ -52,7 +52,7 @@ router.get("/", async (req, res, next) => {
 });
 router.get("/add", async (req, res, next) => {
   try {
-    getToken(req, res)
+    getToken(req, res);
 
     res.render("account/addAccount", {
       title: "Account add page",
@@ -73,7 +73,7 @@ router.get("/delete/:id", async (req, res, next) => {
     ////console.log("delete account ", deleteAccountId);
     await deleteAccount(deleteAccountId);
 
-    getToken(req, res)
+    getToken(req, res);
     const allAccounts = await getAllAccounts();
 
     res.render("account/account", {
@@ -96,7 +96,7 @@ router.post("/", async (req, res, next) => {
     ////console.log("account update", accountUpdate);
     await updateAccount(accountUpdate);
 
-    getToken(req, res)
+    getToken(req, res);
     const allAccounts = await getAllAccounts();
 
     res.render("account/account", {
@@ -116,12 +116,17 @@ router.post("/", async (req, res, next) => {
 router.post("/add", async (req, res, next) => {
   try {
     const newAccount = req.body;
-    await addAccount(newAccount);
-
-    getToken(req, res)
     const allAccounts = await getAllAccounts();
-    
-    res.redirect("/account")
+    getToken(req, res);
+    for (let i = 0; i < allAccounts.length; i++) {
+      if (newAccount.username == allAccounts[i].username) {
+        res.redirect("/account");
+        return;
+      }
+    }
+
+    await addAccount(newAccount);
+    res.redirect("/account");
     /*
     res.render("account/account", {
       title: "Account page",
@@ -146,7 +151,7 @@ router.get("/edit/:id", async (req, res, next) => {
     const oneAccount = await getOneAccount(id);
     //console.log("one account", oneAccount[0]);
 
-    getToken(req, res)
+    getToken(req, res);
 
     res.render("account/editAccount", {
       title: "Account edit page",

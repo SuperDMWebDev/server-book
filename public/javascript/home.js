@@ -31,9 +31,9 @@ config.element = "pie-chart";
 Morris.Donut({
   element: "pie-chart",
   data: [
-    { label: "products", value: 12 },
-    { label: "accounts", value: 4 },
-    { label: "comments", value: 2 },
+    { label: "products", value: 17 },
+    { label: "accounts", value: 2 },
+    { label: "comments", value: 4 },
     { label: "orders", value: 4 },
   ],
 });

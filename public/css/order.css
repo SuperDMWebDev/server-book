@@ -68,3 +68,6 @@ img {
 .button-edit {
   text-align: center;
 }
+.input-group {
+  display: none;
+}
